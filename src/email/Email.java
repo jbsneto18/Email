@@ -8,7 +8,8 @@ package email;
 
 /**
  *
- * @author Jose
+ * @author Álvaro Maciel, Cleiton Fernando
+ * 	
  */
 public class Email {
 
