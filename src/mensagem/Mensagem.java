@@ -6,18 +6,45 @@
 
 package mensagem;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Jose
  */
-public class Mensagem {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
-    	System.out.println("");
-    }
-    
+public class Mensagem implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private String remetente;
+	private String destinatario;
+	private String corpo;
+	
+	public String getRemetente(){
+		return this.remetente;
+	}
+	
+	public String getDestinatario(){
+		return this.destinatario;
+	}
+	
+	public String getCorpo(){
+		return this.corpo;
+	}
+	
+	public void setRemetente(String remetente){
+		this.remetente = remetente;
+	}
+	
+	public void setDestinatario(String destinatario){
+		this.destinatario = destinatario;
+	}
+	
+	public void setCorpo(String corpo){
+		this.corpo = corpo;
+	}
+	
+	
+	
 }
