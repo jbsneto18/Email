@@ -2,7 +2,11 @@ package telas;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 
 public class PainelPrincipal extends JPanel {
@@ -10,7 +14,8 @@ public class PainelPrincipal extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PainelPrincipal() {
+	public PainelPrincipal(TelaPrincipal tp) {
+		
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Tela Principal");
@@ -29,6 +34,16 @@ public class PainelPrincipal extends JPanel {
 		JButton btnSair = new JButton("Sair");
 		btnSair.setBounds(217, 238, 140, 23);
 		add(btnSair);
+		
+		btnCaixaDeEntrada.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				tp.getCaixaEntrada();
+			}
+		});
+
 
 	}
 

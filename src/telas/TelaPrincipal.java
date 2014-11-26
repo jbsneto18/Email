@@ -41,8 +41,16 @@ public class TelaPrincipal extends JFrame {
 		setBounds(100, 100, 600, 400);
 		
 		
-		PainelPrincipal painelPrinc = new PainelPrincipal();
+		PainelPrincipal painelPrinc = new PainelPrincipal(this);
 		this.add(painelPrinc);
 		
+		
+	}
+	
+	public void getCaixaEntrada(){
+		this.getContentPane().removeAll();
+		CaixaEntrada caixEntr = new CaixaEntrada();
+		this.getContentPane().add(caixEntr);
+		this.setVisible(true);
 	}
 }
