@@ -19,7 +19,7 @@ public class NovaMensagem extends JPanel {
 		setLayout(null);
 		
 		JLabel lblNovaMensagem = new JLabel("Nova Mensagem");
-		lblNovaMensagem.setBounds(137, 5, 175, 26);
+		lblNovaMensagem.setBounds(193, 4, 175, 26);
 		lblNovaMensagem.setFont(new Font("Arial Black", Font.BOLD, 18));
 		add(lblNovaMensagem);
 		
@@ -49,16 +49,16 @@ public class NovaMensagem extends JPanel {
 		add(lblMensagem);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(10, 178, 430, 70);
+		textField_2.setBounds(10, 178, 580, 164);
 		add(textField_2);
 		textField_2.setColumns(10);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(351, 259, 89, 23);
+		btnCancelar.setBounds(501, 353, 89, 23);
 		add(btnCancelar);
 		
 		JButton btnEnviar = new JButton("Enviar");
-		btnEnviar.setBounds(252, 259, 89, 23);
+		btnEnviar.setBounds(402, 353, 89, 23);
 		add(btnEnviar);
 		
 		JLabel lblTtulo = new JLabel("T\u00EDtulo");

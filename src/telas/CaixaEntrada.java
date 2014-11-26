@@ -18,11 +18,11 @@ public class CaixaEntrada extends JPanel {
 		setLayout(null);
 		
 		List list = new List();
-		list.setBounds(10, 78, 430, 159);
+		list.setBounds(10, 78, 580, 250);
 		add(list);
 		
 		JLabel lblCaixaDeEntrada = new JLabel("Caixa de Entrada");
-		lblCaixaDeEntrada.setBounds(130, 11, 185, 26);
+		lblCaixaDeEntrada.setBounds(191, 11, 185, 26);
 		lblCaixaDeEntrada.setFont(new Font("Arial Black", Font.BOLD, 18));
 		add(lblCaixaDeEntrada);
 		
@@ -37,11 +37,11 @@ public class CaixaEntrada extends JPanel {
 		add(rdbtnNewRadioButton);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(351, 243, 89, 23);
+		btnCancelar.setBounds(501, 334, 89, 23);
 		add(btnCancelar);
 		
 		JButton btnBuscar = new JButton("Buscar");
-		btnBuscar.setBounds(252, 243, 89, 23);
+		btnBuscar.setBounds(402, 334, 89, 23);
 		add(btnBuscar);
 
 	}
