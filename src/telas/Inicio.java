@@ -18,6 +18,7 @@ public class Inicio extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtEmail;
+	private TelaPrincipal newTela = new TelaPrincipal();
 
 	/**
 	 * Launch the application.
@@ -39,9 +40,10 @@ public class Inicio extends JFrame {
 	 * Create the frame.
 	 */
 	public Inicio() {
+		setTitle("Controle de E-mails - SD");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 699, 372);
+		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -50,24 +52,32 @@ public class Inicio extends JFrame {
 		Label lblEmail = new Label("E-mail");
 		lblEmail.setForeground(Color.BLACK);
 		lblEmail.setFont(new Font("Arial", Font.BOLD, 14));
-		lblEmail.setBounds(199, 95, 62, 22);
+		lblEmail.setBounds(106, 96, 62, 22);
 		contentPane.add(lblEmail);
 		
-		txtEmail = new JTextField();
-		txtEmail.setBounds(199, 131, 343, 20);
+		txtEmail = new JTextField("");
+		txtEmail.setBounds(109, 131, 343, 20);
 		contentPane.add(txtEmail);
 		txtEmail.setColumns(10);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(353, 162, 89, 23);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+			}
+		});
+		btnCancelar.setBounds(264, 162, 89, 23);
 		contentPane.add(btnCancelar);
 		
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				newTela = new TelaPrincipal();
+				newTela.setVisible(true);
+				dispose();
 			}
 		});
-		btnEntrar.setBounds(453, 162, 89, 23);
+		btnEntrar.setBounds(363, 162, 89, 23);
 		contentPane.add(btnEntrar);
 	}
 }
