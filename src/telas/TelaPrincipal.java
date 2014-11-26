@@ -49,8 +49,33 @@ public class TelaPrincipal extends JFrame {
 	
 	public void getCaixaEntrada(){
 		this.getContentPane().removeAll();
-		CaixaEntrada caixEntr = new CaixaEntrada();
+		CaixaEntrada caixEntr = new CaixaEntrada(this);
 		this.getContentPane().add(caixEntr);
+		this.setVisible(true);
+	}
+	
+	public void getNovaMensagem(){
+		this.getContentPane().removeAll();
+		NovaMensagem novMen = new NovaMensagem(this);
+		this.getContentPane().add(novMen);
+		this.setVisible(true);
+	}
+	
+	public void getSair(){
+		this.dispose();
+	}
+	
+	public void getCancelarCaixaEntrada(){
+		this.getContentPane().removeAll();
+		PainelPrincipal painelPrinc = new PainelPrincipal(this);
+		this.getContentPane().add(painelPrinc);
+		this.setVisible(true);
+	}
+	
+	public void getCancelarNovaMensagem(){
+		this.getContentPane().removeAll();
+		PainelPrincipal painelPrinc = new PainelPrincipal(this);
+		this.getContentPane().add(painelPrinc);
 		this.setVisible(true);
 	}
 }

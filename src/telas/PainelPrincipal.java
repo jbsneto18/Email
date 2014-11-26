@@ -40,10 +40,27 @@ public class PainelPrincipal extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
-				tp.getCaixaEntrada();
+					tp.getCaixaEntrada();
 			}
 		});
 
+		btnNovaMensagem.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				tp.getNovaMensagem();
+			}
+		});
+		
+		btnSair.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				tp.getSair();
+			}
+		});
 
 	}
 

@@ -2,7 +2,11 @@ package telas;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
@@ -15,7 +19,7 @@ public class NovaMensagem extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public NovaMensagem() {
+	public NovaMensagem(TelaPrincipal tp) {
 		setLayout(null);
 		
 		JLabel lblNovaMensagem = new JLabel("Nova Mensagem");
@@ -49,16 +53,16 @@ public class NovaMensagem extends JPanel {
 		add(lblMensagem);
 		
 		textField_2 = new JTextField();
-		textField_2.setBounds(10, 178, 580, 164);
+		textField_2.setBounds(10, 178, 580, 139);
 		add(textField_2);
 		textField_2.setColumns(10);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(501, 353, 89, 23);
+		btnCancelar.setBounds(501, 328, 89, 23);
 		add(btnCancelar);
 		
 		JButton btnEnviar = new JButton("Enviar");
-		btnEnviar.setBounds(402, 353, 89, 23);
+		btnEnviar.setBounds(400, 328, 89, 23);
 		add(btnEnviar);
 		
 		JLabel lblTtulo = new JLabel("T\u00EDtulo");
@@ -70,6 +74,15 @@ public class NovaMensagem extends JPanel {
 		textField_3.setBounds(10, 122, 302, 20);
 		add(textField_3);
 		textField_3.setColumns(10);
+		
+		btnCancelar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				tp.getCancelarNovaMensagem();
+			}
+		});
 
 	}
 

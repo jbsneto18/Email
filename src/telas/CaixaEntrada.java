@@ -2,8 +2,11 @@ package telas;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
 import java.awt.Font;
 import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
@@ -14,7 +17,7 @@ public class CaixaEntrada extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public CaixaEntrada() {
+	public CaixaEntrada(TelaPrincipal tp) {
 		setLayout(null);
 		
 		List list = new List();
@@ -43,6 +46,15 @@ public class CaixaEntrada extends JPanel {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(402, 334, 89, 23);
 		add(btnBuscar);
+		
+		btnCancelar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				tp.getCancelarCaixaEntrada();
+			}
+		});
 
 	}
 
