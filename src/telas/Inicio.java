@@ -6,19 +6,15 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.Label;
-import java.awt.Font;
-import java.awt.Color;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class Inicio extends JFrame {
 
 	private JPanel contentPane;
+<<<<<<< HEAD
 	private JTextField txtEmail;
 	private TelaPrincipal newTela = new TelaPrincipal();
+=======
+>>>>>>> origin/master
 
 	/**
 	 * Launch the application.
@@ -40,13 +36,20 @@ public class Inicio extends JFrame {
 	 * Create the frame.
 	 */
 	public Inicio() {
+<<<<<<< HEAD
 		setTitle("Controle de E-mails - SD");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
+=======
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+>>>>>>> origin/master
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+<<<<<<< HEAD
 		contentPane.setLayout(null);
 		
 		Label lblEmail = new Label("E-mail");
@@ -79,5 +82,8 @@ public class Inicio extends JFrame {
 		});
 		btnEntrar.setBounds(363, 162, 89, 23);
 		contentPane.add(btnEntrar);
+=======
+>>>>>>> origin/master
 	}
+
 }
