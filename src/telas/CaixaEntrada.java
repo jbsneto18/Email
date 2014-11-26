@@ -4,8 +4,10 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.List;
+
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
+import javax.swing.border.EmptyBorder;
 
 public class CaixaEntrada extends JPanel {
 

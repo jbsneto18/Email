@@ -36,32 +36,13 @@ public class TelaPrincipal extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaPrincipal() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contentPane);
-		contentPane.setLayout(null);
 		
-		JButton btnCaixaDeEntrada = new JButton("Caixa de Entrada");
-		btnCaixaDeEntrada.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnCaixaDeEntrada.setBounds(220, 112, 138, 23);
-		contentPane.add(btnCaixaDeEntrada);
 		
-		JButton btnNovaMensagem = new JButton("Nova Mensagem");
-		btnNovaMensagem.setBounds(220, 155, 138, 23);
-		contentPane.add(btnNovaMensagem);
+		PainelPrincipal painelPrinc = new PainelPrincipal();
+		this.add(painelPrinc);
 		
-		JButton btnSair = new JButton("Sair");
-		btnSair.setBounds(220, 196, 138, 23);
-		contentPane.add(btnSair);
-		
-		Label label = new Label("Tela Principal");
-		label.setFont(new Font("Arial", Font.BOLD, 20));
-		label.setBounds(220, 52, 151, 22);
-		contentPane.add(label);
 	}
 }
