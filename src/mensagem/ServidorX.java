@@ -22,7 +22,10 @@ public class ServidorX {
             Mensagem message = (Mensagem) ois.readObject();
             Serializador.addEmail(message);
             
-            System.out.println("Mensagem recebida, remetente: "+message.getRemetente());
+            System.out.println("Mensagem recebida!\n remetente: "+message.getRemetente());
+            System.out.println("Destinatário: "+message.getDestinatario());
+            System.out.println("Titulo: "+message.getTitulo());
+            System.out.println("Corpo: "+message.getCorpo());
             ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
             oos.writeObject("Ok");
             ois.close();
