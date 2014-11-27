@@ -31,6 +31,7 @@ public class CadastroUsuario extends JPanel {
 	 */
 	public CadastroUsuario(TelaPrincipal fp) {
 		setLayout(null);
+		SerializadorUser.carregaUser();
 		
 		JLabel lblCadastroDeCliente = new JLabel("Cadastro de Usu\u00E1rio");
 		lblCadastroDeCliente.setFont(new Font("Arial", Font.BOLD, 18));
@@ -77,8 +78,7 @@ public class CadastroUsuario extends JPanel {
 				email = txtEmail.getText();
 				
 				Cadastro cad = new Cadastro(nome, email);
-				SerializadorUser.carregaUser();
-				SerializadorUser.addUser(cad);
+	            SerializadorUser.addUser(cad);
 				SerializadorUser.salvarUser();
 				
 				JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
