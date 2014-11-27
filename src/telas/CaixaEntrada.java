@@ -17,7 +17,7 @@ public class CaixaEntrada extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public CaixaEntrada(TelaPrincipal tp) {
+	public CaixaEntrada(final TelaPrincipal tp) {
 		setLayout(null);
 		
 		List list = new List();

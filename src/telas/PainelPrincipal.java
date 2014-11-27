@@ -11,10 +11,8 @@ import javax.swing.JButton;
 
 public class PainelPrincipal extends JPanel {
 
-	/**
-	 * Create the panel.
-	 */
-	public PainelPrincipal(TelaPrincipal tp) {
+	
+	public PainelPrincipal(final TelaPrincipal tp) {
 		
 		setLayout(null);
 		

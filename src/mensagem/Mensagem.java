@@ -19,6 +19,7 @@ public class Mensagem implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String remetente;
 	private String destinatario;
+	private String titulo;
 	private String corpo;
 	
 	public String getRemetente(){
@@ -33,6 +34,10 @@ public class Mensagem implements Serializable {
 		return this.corpo;
 	}
 	
+	public String getTitulo(){
+		return this.titulo;
+	}
+	
 	public void setRemetente(String remetente){
 		this.remetente = remetente;
 	}
@@ -43,6 +48,10 @@ public class Mensagem implements Serializable {
 	
 	public void setCorpo(String corpo){
 		this.corpo = corpo;
+	}
+	
+	public void setTitulo(String titulo){
+		this.titulo = titulo;
 	}
 
 }

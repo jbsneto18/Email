@@ -3,12 +3,17 @@ package telas;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
+import Serializador.Serializador;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import mensagem.Cliente;
 
 public class NovaMensagem extends JPanel {
 	private JTextField textField;
@@ -19,7 +24,7 @@ public class NovaMensagem extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public NovaMensagem(TelaPrincipal tp) {
+	public NovaMensagem(final TelaPrincipal tp) {
 		setLayout(null);
 		
 		JLabel lblNovaMensagem = new JLabel("Nova Mensagem");
@@ -84,6 +89,27 @@ public class NovaMensagem extends JPanel {
 			}
 		});
 
+		btnEnviar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String remetente, destinatario, corpo, titulo;
+				remetente = textField.getText();
+				destinatario = textField_1.getText();
+				corpo = textField_2.getText();
+				titulo = textField_3.getText();
+				
+				try {
+					Cliente c = new Cliente(remetente, destinatario, corpo, titulo);
+				} catch (ClassNotFoundException | IOException
+						| InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+		
 	}
 
 }
