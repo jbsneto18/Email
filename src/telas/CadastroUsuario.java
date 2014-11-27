@@ -2,15 +2,28 @@ package telas;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+
 import java.awt.Font;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import Serializador.SerializadorUser;
+import CadastroUser.Cadastro;
+import mensagem.Cliente;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class CadastroUsuario extends JPanel {
 	private JTextField txtNome;
 	private JTextField txtEmail;
+	ObjectOutputStream oos = null;
+	ObjectInputStream ois = null;
 
 	/**
 	 * Create the panel.
@@ -53,6 +66,22 @@ public class CadastroUsuario extends JPanel {
 		add(btnCancelar);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String nome, email;
+				nome = txtNome.getText();
+				email = txtEmail.getText();
+				
+				Cadastro cad = new Cadastro();
+				cad.setNome(nome);
+				cad.setEmail(email);
+				
+				
+			}
+		});
 		btnCadastrar.setBounds(192, 221, 110, 23);
 		add(btnCadastrar);
 
