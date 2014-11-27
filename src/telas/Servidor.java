@@ -21,6 +21,9 @@ import java.io.IOException;
 
 import mensagem.ServidorX;
 import mensagem.ServidorY;
+import java.awt.List;
+import java.awt.Scrollbar;
+import java.awt.Label;
 
 public class Servidor extends JFrame {
 
@@ -53,7 +56,7 @@ public class Servidor extends JFrame {
 		Serializador.carregaEmails();
 		Serializador.listaEmail();
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -90,7 +93,7 @@ public class Servidor extends JFrame {
 				}).start();
 			}
 		});
-		btnAtivar.setBounds(84, 104, 89, 23);
+		btnAtivar.setBounds(10, 35, 89, 23);
 		contentPane.add(btnAtivar);
 		
 		this.btnDesligar = new JButton("Desligar");
@@ -111,14 +114,44 @@ public class Servidor extends JFrame {
 				}).start();
 			}
 		});
-		btnDesligar.setBounds(251, 104, 89, 23);
+		btnDesligar.setBounds(109, 35, 89, 23);
 		contentPane.add(btnDesligar);
 		
 		JLabel lblServidor = new JLabel("Servidor");
-		lblServidor.setBounds(167, 11, 94, 44);
+		lblServidor.setBounds(10, 0, 94, 29);
 		lblServidor.setForeground(Color.BLACK);
 		lblServidor.setFont(new Font("Arial", Font.BOLD, 18));
 		contentPane.add(lblServidor);
+		
+		List listUsuarios = new List();
+		listUsuarios.setBounds(10, 111, 183, 240);
+		contentPane.add(listUsuarios);
+		
+		Scrollbar scrollbar = new Scrollbar();
+		scrollbar.setBounds(172, 111, 17, 240);
+		contentPane.add(scrollbar);
+		
+		Label lblClientes = new Label("Clientes");
+		lblClientes.setFont(new Font("Arial", Font.BOLD, 12));
+		lblClientes.setBounds(10, 83, 62, 22);
+		contentPane.add(lblClientes);
+		
+		Label lblMensagem = new Label("Mensagens");
+		lblMensagem.setFont(new Font("Arial", Font.BOLD, 12));
+		lblMensagem.setBounds(199, 83, 80, 22);
+		contentPane.add(lblMensagem);
+		
+		List list = new List();
+		list.setBounds(199, 111, 183, 240);
+		contentPane.add(list);
+		
+		Label lblConectado = new Label("Conectados");
+		lblConectado.setFont(new Font("Arial", Font.BOLD, 12));
+		lblConectado.setBounds(389, 83, 80, 22);
+		contentPane.add(lblConectado);
+		
+		List list_1 = new List();
+		list_1.setBounds(388, 111, 183, 240);
+		contentPane.add(list_1);
 	}
-
 }

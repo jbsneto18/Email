@@ -17,14 +17,14 @@ public class SerializadorUser {
 		FileOutputStream arquivo;
 		ObjectOutputStream output;
 
-		File file = new File("usuáriosCadastrados.bin");
+		File file = new File("usuariosCadastrados.bin");
 
 		try {
 			if (!file.exists()) {
 				file.createNewFile();
 			}
 
-			arquivo = new FileOutputStream("usuáriosCadastrados.bin");
+			arquivo = new FileOutputStream("usuariosCadastrados.bin");
 			output = new ObjectOutputStream(arquivo);
 
 			output.writeObject(user);
