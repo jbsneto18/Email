@@ -63,7 +63,7 @@ public class CadastroUsuario extends JPanel {
 				fp.dispose();
 			}
 		});
-		btnCancelar.setBounds(312, 221, 89, 23);
+		btnCancelar.setBounds(290, 221, 110, 23);
 		add(btnCancelar);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -85,7 +85,7 @@ public class CadastroUsuario extends JPanel {
 				fp.getCancelarNovaMensagem();
 			}
 		});
-		btnCadastrar.setBounds(192, 221, 110, 23);
+		btnCadastrar.setBounds(165, 221, 110, 23);
 		add(btnCadastrar);
 
 	}

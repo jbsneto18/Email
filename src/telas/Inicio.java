@@ -100,6 +100,7 @@ public class Inicio extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
+				dispose();
 				newTela.getCadastroUsuario();
 			}
 		});
