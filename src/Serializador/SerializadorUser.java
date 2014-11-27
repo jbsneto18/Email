@@ -41,7 +41,7 @@ public class SerializadorUser {
 		FileInputStream arquivoLeitura;
 		ObjectInputStream output;
 
-		File arquivo = new File("usuáriosCadastrados.bin");
+		File arquivo = new File("usuariosCadastrados.bin");
 
 		try {
 			if (!arquivo.exists()) {
@@ -49,7 +49,7 @@ public class SerializadorUser {
 				return user;
 			}
 
-			arquivoLeitura = new FileInputStream("usuáriosCadastrados.bin");
+			arquivoLeitura = new FileInputStream("usuariosCadastrados.bin");
 			output = new ObjectInputStream(arquivoLeitura);
 
 			user = (ArrayList<Cadastro>) output.readObject();

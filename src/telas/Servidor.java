@@ -1,6 +1,6 @@
 package telas;
 
-import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -27,6 +27,8 @@ public class Servidor extends JFrame {
 	private JPanel contentPane;
 	private ServidorX servidorX;
 	private ServidorY servidorY;
+	private JButton btnAtivar;
+	private JButton btnDesligar;
 
 	/**
 	 * Launch the application.
@@ -65,9 +67,15 @@ public class Servidor extends JFrame {
 			}
 			  });
 		
-		JButton btnAtivar = new JButton("Ativar");
+		this.btnAtivar = new JButton("Ativar");
+		
 		btnAtivar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				btnAtivar.setEnabled(false);
+				btnDesligar.setEnabled(true);
+				
+				
 				new Thread(new Runnable() {  
 				    @Override  
 				    public void run() {  
@@ -85,9 +93,15 @@ public class Servidor extends JFrame {
 		btnAtivar.setBounds(84, 104, 89, 23);
 		contentPane.add(btnAtivar);
 		
-		JButton btnDesligar = new JButton("Desligar");
+		this.btnDesligar = new JButton("Desligar");
+		
+		
 		btnDesligar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				btnAtivar.setEnabled(true);
+				btnDesligar.setEnabled(false);
+				
 				new Thread(new Runnable() {  
 				    @Override  
 				    public void run() {  
