@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
 
 public class Inicio extends JFrame {
 
@@ -50,9 +51,9 @@ public class Inicio extends JFrame {
 
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
 
+		contentPane.setLayout(null);
 		contentPane.setLayout(null);
 		
 		Label lblEmail = new Label("E-mail");
@@ -72,7 +73,7 @@ public class Inicio extends JFrame {
 				dispose();
 			}
 		});
-		btnCancelar.setBounds(264, 162, 89, 23);
+		btnCancelar.setBounds(363, 162, 89, 23);
 		contentPane.add(btnCancelar);
 		
 		JButton btnEntrar = new JButton("Entrar");
@@ -83,8 +84,25 @@ public class Inicio extends JFrame {
 				dispose();
 			}
 		});
-		btnEntrar.setBounds(363, 162, 89, 23);
+		btnEntrar.setBounds(265, 162, 89, 23);
 		contentPane.add(btnEntrar);
+		
+		JLabel lblNovoUsurio = new JLabel("Novo Usu\u00E1rio ?");
+		lblNovoUsurio.setFont(new Font("Arial", Font.BOLD, 12));
+		lblNovoUsurio.setBounds(333, 228, 89, 23);
+		contentPane.add(lblNovoUsurio);
+		
+		JButton btnCadastrese = new JButton("Cadastre-se");
+		btnCadastrese.setBounds(333, 262, 119, 23);
+		contentPane.add(btnCadastrese);
+		btnCadastrese.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				newTela.getCadastroUsuario();
+			}
+		});
 
 	}
 

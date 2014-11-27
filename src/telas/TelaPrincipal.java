@@ -78,4 +78,12 @@ public class TelaPrincipal extends JFrame {
 		this.getContentPane().add(painelPrinc);
 		this.setVisible(true);
 	}
+	
+	public void getCadastroUsuario ()
+	{
+		this.getContentPane().removeAll();
+		CadastroUsuario cdUser = new CadastroUsuario(this);
+		this.getContentPane().add(cdUser);
+		this.setVisible(true);
+	}
 }
