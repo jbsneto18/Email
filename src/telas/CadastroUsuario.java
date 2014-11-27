@@ -1,5 +1,6 @@
 package telas;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
@@ -76,8 +77,12 @@ public class CadastroUsuario extends JPanel {
 				email = txtEmail.getText();
 				
 				Cadastro cad = new Cadastro(nome, email);
+				SerializadorUser.carregaUser();
 				SerializadorUser.addUser(cad);
 				SerializadorUser.salvarUser();
+				
+				JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+				fp.getCancelarNovaMensagem();
 			}
 		});
 		btnCadastrar.setBounds(192, 221, 110, 23);
