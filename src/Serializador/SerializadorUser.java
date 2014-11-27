@@ -12,7 +12,7 @@ import CadastroUser.Cadastro;;
 public class SerializadorUser {
 	static ArrayList<Cadastro> user = new ArrayList<Cadastro>();
 
-	public static void salvarEmail() {
+	public static void salvarUser() {
 
 		FileOutputStream arquivo;
 		ObjectOutputStream output;

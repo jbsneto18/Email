@@ -75,11 +75,9 @@ public class CadastroUsuario extends JPanel {
 				nome = txtNome.getText();
 				email = txtEmail.getText();
 				
-				Cadastro cad = new Cadastro();
-				cad.setNome(nome);
-				cad.setEmail(email);
-				
-				
+				Cadastro cad = new Cadastro(nome, email);
+				SerializadorUser.addUser(cad);
+				SerializadorUser.salvarUser();
 			}
 		});
 		btnCadastrar.setBounds(192, 221, 110, 23);

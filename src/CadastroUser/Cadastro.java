@@ -10,6 +10,12 @@ public class Cadastro implements Serializable {
 	private String nome;
 	private String email;
 	
+	public Cadastro(String nome, String email) {
+		// TODO Auto-generated constructor stub
+		this.nome = nome;
+		this.email = email;
+	}
+
 	public String getNome(){
 		return this.nome;
 	}
