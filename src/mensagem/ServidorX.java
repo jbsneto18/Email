@@ -49,7 +49,7 @@ public class ServidorX {
 				String emailUsuario = (String) dados;
 				ArrayList<Mensagem> m = new ArrayList<Mensagem>();
 				for(int i = 0; i < Serializador.email.size(); i++){
-					if(Serializador.email.get(i).getRemetente().equals(emailUsuario)){
+					if(Serializador.email.get(i).getDestinatario().equals(emailUsuario)){
 						m.add(Serializador.email.get(i));
 					}
 				}
