@@ -1,8 +1,11 @@
 package telas;
 
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
+import java.awt.Button;
 import java.awt.Font;
 import java.awt.List;
 import java.awt.event.ActionEvent;
@@ -45,6 +48,11 @@ public class CaixaEntrada extends JPanel {
 		rdbtnNewRadioButton.setBounds(155, 49, 131, 23);
 		add(rdbtnNewRadioButton);
 		
+		ButtonGroup group = new ButtonGroup();
+		
+		group.add(rdbtnNewRadioButton);
+		group.add(rdbtnUltimaMensagem);
+		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(501, 334, 89, 23);
 		add(btnCancelar);
@@ -52,25 +60,52 @@ public class CaixaEntrada extends JPanel {
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Cliente c = new Cliente();
-				try {
-					ArrayList<Mensagem> m = c.retornarEmails(tp.getUsuarioLogado());
+				
+				if (rdbtnNewRadioButton.isSelected())
+				{
+					Cliente c = new Cliente();
+					try {
+						ArrayList<Mensagem> m = c.retornarEmails(tp.getUsuarioLogado());
+						list.removeAll();
+						for (int i=0; i < m.size(); i++){
+							list.add("                                                                         Mensagem "+ i);
+							list.add("Remetente:");
+							list.add(m.get(i).getTitulo());
+							list.add("\n");
+							list.add("Mensagem:");
+							list.add(m.get(i).getCorpo());
+							list.add("-------------------------------------------------------------------------------------------------------------------------------------------------------");
+						}
+						
+					} catch (ClassNotFoundException | IOException
+							| InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+				else if (rdbtnUltimaMensagem.isSelected())
+				{
+					Cliente c = new Cliente();
 					
-					for (int i=0; i < m.size(); i++){
-						list.add("                                                                         Mensagem "+ i);
+					int tam = 0;
+					
+					try
+					{
+						ArrayList<Mensagem> m = c.retornarEmails(tp.getUsuarioLogado());
+						
+						tam = m.size();
+						list.removeAll();
+						list.add("                                                                         Mensagem "+ tam);
 						list.add("Remetente:");
-						list.add(m.get(i).getTitulo());
+						list.add(m.get(tam-1).getTitulo());
 						list.add("\n");
 						list.add("Mensagem:");
-						list.add(m.get(i).getCorpo());
-						list.add("-------------------------------------------------------------------------------------------------------------------------------------------------------");
-					}
-					
-				} catch (ClassNotFoundException | IOException
-						| InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+						list.add(m.get(tam-1).getCorpo());
+						
+					}catch (Exception e) {}
 				}
+				else
+					JOptionPane.showMessageDialog(null, "Selecione uma das opções!");
 			}
 		});
 		btnBuscar.setBounds(402, 334, 89, 23);

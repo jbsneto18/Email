@@ -133,11 +133,11 @@ public class Servidor extends JFrame {
 		contentPane.add(lblServidor);
 		
 		this.listUsuarios = new List();
-		listUsuarios.setBounds(10, 111, 183, 240);
+		listUsuarios.setBounds(10, 111, 183, 219);
 		contentPane.add(listUsuarios);
 		
 		Scrollbar scrollbar = new Scrollbar();
-		scrollbar.setBounds(172, 111, 17, 240);
+		scrollbar.setBounds(172, 111, 17, 219);
 		contentPane.add(scrollbar);
 		
 		Label lblClientes = new Label("Clientes");
@@ -151,8 +151,12 @@ public class Servidor extends JFrame {
 		contentPane.add(lblMensagem);
 		
 		List list = new List();
-		list.setBounds(199, 111, 375, 240);
+		list.setBounds(199, 111, 375, 219);
 		contentPane.add(list);
+		
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.setBounds(485, 336, 89, 23);
+		contentPane.add(btnAtualizar);
 	}
 	
 	public void listaUsersCadastrados ()
