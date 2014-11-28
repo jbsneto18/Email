@@ -106,26 +106,35 @@ public class NovaMensagem extends JPanel {
 				corpo = txtCorpo.getText();
 				titulo = txtTitulo.getText();
 				
-				if (!destinatario.equals("") || !corpo.equals("") || !titulo.equals(""))
+				if (!destinatario.isEmpty() && !corpo.isEmpty() && !titulo.isEmpty())
 				{
+					
+					int status = 0;
+					
 					SerializadorUser.carregaUser();
-				/*
+				
 					for (int i=0; i< SerializadorUser.user.size(); i++)
 					{
 						if (destinatario.equals(SerializadorUser.user.get(i).getEmail()))
-						{*/
+						{
 							try {
 								Cliente c = new Cliente();
 								c.cadastrarEmail(remetente, destinatario, corpo, titulo);
+								status = 1;
+								tp.getCancelarCaixaEntrada();
+								break;
 							} catch (ClassNotFoundException | IOException
 									| InterruptedException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-						//}
-						//else
-							//JOptionPane.showInternalMessageDialog(null, "Destinatario Desconhecido, forneça um destinatário válido!");
-					//}
+						}
+					}
+					
+					if (status == 0)
+						JOptionPane.showMessageDialog(null, "Destinatario Desconhecido, forneça um destinatário válido!");
+					else
+						JOptionPane.showMessageDialog(null, "Mensagem enviada com sucesso!");
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente!");
