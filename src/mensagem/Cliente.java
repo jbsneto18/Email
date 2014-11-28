@@ -6,17 +6,22 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 public class Cliente {
 
-	public Cliente(String remetente, String destinatario, String corpo, String titulo) throws UnknownHostException,
-			IOException, ClassNotFoundException, InterruptedException {
+	public Cliente() {
 
+	}
+
+	public void cadastrarEmail(String remetente, String destinatario,
+			String corpo, String titulo) throws UnknownHostException,
+			IOException, ClassNotFoundException, InterruptedException {
 		InetAddress host = InetAddress.getLocalHost();
 		Socket socket = null;
 		ObjectOutputStream oos = null;
 		ObjectInputStream ois = null;
-		
+
 		Mensagem m = new Mensagem();
 		m.setCorpo(corpo);
 		m.setDestinatario(destinatario);
@@ -28,15 +33,46 @@ public class Cliente {
 		System.out.println("Sending request to Socket Server");
 		
 		ClientEnviaMsg envia = new ClientEnviaMsg(oos, m);
-		new Thread(envia).start();;
+		new Thread(envia).start();
 		
+		// RESPOSTA DO SERVIDOR
 		ois = new ObjectInputStream(socket.getInputStream());
-		ClientRecebMsg recebe =  new ClientRecebMsg(ois);
-		new Thread(recebe).start();
-
+		ClientRecebMsg recebe = new ClientRecebMsg(ois);
+		// ///////////////////////////////////////////////////////////////
+		ois.close();
+		oos.close();
 		socket.close();
 
 		Thread.sleep(100);
+	}
+
+	public ArrayList<Mensagem> retornarEmails(String email)
+			throws UnknownHostException, IOException, ClassNotFoundException,
+			InterruptedException {
+		
+		InetAddress host = InetAddress.getLocalHost();
+		Socket socket = null;
+		ObjectOutputStream oos = null;
+		ObjectInputStream ois = null;
+
+		socket = new Socket(host.getHostName(), 9876);
+		oos = new ObjectOutputStream(socket.getOutputStream());
+		
+		ClientPedeEmails pede = new ClientPedeEmails(oos, email);
+
+		// RESPOSTA DO SERVIDOR É O ARRAY LIST COM OS EMAIL ESPECIFICOS DO USUARIO LOGADO
+		ois = new ObjectInputStream(socket.getInputStream());
+		
+		ClientLerEmails ler = new ClientLerEmails(ois);
+		
+		ArrayList<Mensagem> retorno = (ArrayList<Mensagem>) ois.readObject();
+		// ///////////////////////////////////////////////////////////////
+		ois.close();
+		oos.close();
+		socket.close();
+		
+		return retorno;
 
 	}
+
 }

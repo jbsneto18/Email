@@ -20,7 +20,7 @@ import java.awt.Font;
 public class TelaPrincipal extends JFrame {
 
 	private JPanel contentPane;
-	public String email;
+	private String email;
 	
 	/**
 	 * Launch the application.
@@ -95,6 +95,10 @@ public class TelaPrincipal extends JFrame {
 		this.getContentPane().add(cdUser);
 		this.setVisible(true);
 		
+	}
+	
+	public String getUsuarioLogado(){
+		return this.email;
 	}
 	
 }

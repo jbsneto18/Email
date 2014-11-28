@@ -168,6 +168,6 @@ public class Servidor extends JFrame {
 	{
 			SerializadorUser.carregaUser();
 			for (int i=0; i < SerializadorUser.user.size(); i++)
-			listUsuarios.add(SerializadorUser.user.get(i).getNome());
+				listUsuarios.add(SerializadorUser.user.get(i).getNome());
 	}
 }

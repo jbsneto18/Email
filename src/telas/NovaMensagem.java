@@ -37,7 +37,7 @@ public class NovaMensagem extends JPanel {
 		
 		txtRemetente = new JTextField();
 		txtRemetente.setBounds(10, 66, 191, 20);
-		txtRemetente.setText(tp.email);
+		txtRemetente.setText(tp.getUsuarioLogado());
 		txtRemetente.enable(false);
 		add(txtRemetente);
 		txtRemetente.setColumns(10);
@@ -109,22 +109,23 @@ public class NovaMensagem extends JPanel {
 				if (!destinatario.equals("") || !corpo.equals("") || !titulo.equals(""))
 				{
 					SerializadorUser.carregaUser();
-				
+				/*
 					for (int i=0; i< SerializadorUser.user.size(); i++)
 					{
 						if (destinatario.equals(SerializadorUser.user.get(i).getEmail()))
-						{
+						{*/
 							try {
-								Cliente c = new Cliente(remetente, destinatario, corpo, titulo);
+								Cliente c = new Cliente();
+								c.cadastrarEmail(remetente, destinatario, corpo, titulo);
 							} catch (ClassNotFoundException | IOException
 									| InterruptedException e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}
-						}
-						else
-							JOptionPane.showInternalMessageDialog(null, "Destinatario Desconhecido, forneça um destinatário válido!");
-					}
+						//}
+						//else
+							//JOptionPane.showInternalMessageDialog(null, "Destinatario Desconhecido, forneça um destinatário válido!");
+					//}
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente!");
