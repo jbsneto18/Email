@@ -9,9 +9,12 @@ import java.net.UnknownHostException;
 
 public class Cliente {
 
-	public Cliente(String remetente, String destinatario, String corpo, String titulo) throws UnknownHostException,
-			IOException, ClassNotFoundException, InterruptedException {
-
+	public Cliente() {
+		
+	}
+	
+	public void cadastrarEmail(String remetente, String destinatario, String corpo, String titulo)throws UnknownHostException,
+	IOException, ClassNotFoundException, InterruptedException {
 		InetAddress host = InetAddress.getLocalHost();
 		Socket socket = null;
 		ObjectOutputStream oos = null;
@@ -26,17 +29,22 @@ public class Cliente {
 		socket = new Socket(host.getHostName(), 9876);
 		oos = new ObjectOutputStream(socket.getOutputStream());
 		System.out.println("Sending request to Socket Server");
-		
-		ClientEnviaMsg envia = new ClientEnviaMsg(oos, m);
-		new Thread(envia).start();;
-		
+		oos.writeObject(m);
+		//RESPOSTA DO SERVIDOR
 		ois = new ObjectInputStream(socket.getInputStream());
-		ClientRecebMsg recebe =  new ClientRecebMsg(ois);
-		new Thread(recebe).start();
-
-		socket.close();
+		String retorno = (String) ois.readObject();
+		System.out.println(retorno);
+/////////////////////////////////////////////////////////////////
+		ois.close();
+		oos.close();
 
 		Thread.sleep(100);
-
 	}
+	
+	public void retornarEmail()throws UnknownHostException,
+	IOException, ClassNotFoundException, InterruptedException{
+		
+		
+	}
+	
 }
