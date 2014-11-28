@@ -59,6 +59,7 @@ public class Cliente {
 		oos = new ObjectOutputStream(socket.getOutputStream());
 		
 		ClientPedeEmails pede = new ClientPedeEmails(oos, email);
+		new Thread(pede).start();
 
 		// RESPOSTA DO SERVIDOR É O ARRAY LIST COM OS EMAIL ESPECIFICOS DO USUARIO LOGADO
 		ois = new ObjectInputStream(socket.getInputStream());

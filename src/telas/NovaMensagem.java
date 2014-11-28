@@ -16,11 +16,11 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import mensagem.Cliente;
+import javax.swing.JTextArea;
 
 public class NovaMensagem extends JPanel {
 	private JTextField txtRemetente;
 	private JTextField txtDestinatario;
-	private JTextField txtCorpo;
 	private JTextField txtTitulo;
 
 	/**
@@ -62,17 +62,12 @@ public class NovaMensagem extends JPanel {
 		lblMensagem.setBounds(10, 153, 73, 14);
 		add(lblMensagem);
 		
-		txtCorpo = new JTextField();
-		txtCorpo.setBounds(10, 178, 580, 139);
-		add(txtCorpo);
-		txtCorpo.setColumns(10);
-		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(501, 328, 89, 23);
+		btnCancelar.setBounds(482, 328, 89, 23);
 		add(btnCancelar);
 		
 		JButton btnEnviar = new JButton("Enviar");
-		btnEnviar.setBounds(400, 328, 89, 23);
+		btnEnviar.setBounds(383, 328, 89, 23);
 		add(btnEnviar);
 		
 		JLabel lblTtulo = new JLabel("T\u00EDtulo");
@@ -84,6 +79,10 @@ public class NovaMensagem extends JPanel {
 		txtTitulo.setBounds(10, 122, 302, 20);
 		add(txtTitulo);
 		txtTitulo.setColumns(10);
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBounds(10, 189, 569, 128);
+		add(textArea);
 		
 		btnCancelar.addActionListener(new ActionListener() {
 			
@@ -103,7 +102,7 @@ public class NovaMensagem extends JPanel {
 				
 				remetente = txtRemetente.getText();
 				destinatario = txtDestinatario.getText();
-				corpo = txtCorpo.getText();
+				corpo = textArea.getText();
 				titulo = txtTitulo.getText();
 				
 				if (!destinatario.isEmpty() && !corpo.isEmpty() && !titulo.isEmpty())
