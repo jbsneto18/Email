@@ -62,11 +62,4 @@ public class Serializador {
 	public static void addEmail(Mensagem mensagem) {
 		email.add(mensagem);
 	}
-	
-	public static void listaEmail(){
-		for (int i = 0; i < email.size(); i++) { 
-			System.out.println(email.get(i).getRemetente()+"\n");
-		}
-	}
-
 }

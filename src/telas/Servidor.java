@@ -35,6 +35,7 @@ public class Servidor extends JFrame {
 	private JButton btnAtivar;
 	private JButton btnDesligar;
 	private List listUsuarios;
+	private List listMensagem;
 
 	/**
 	 * Launch the application.
@@ -57,7 +58,6 @@ public class Servidor extends JFrame {
 	 */
 	public Servidor() {
 		Serializador.carregaEmails();
-		Serializador.listaEmail();
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
@@ -150,13 +150,22 @@ public class Servidor extends JFrame {
 		lblMensagem.setBounds(199, 83, 80, 22);
 		contentPane.add(lblMensagem);
 		
-		List list = new List();
-		list.setBounds(199, 111, 375, 219);
-		contentPane.add(list);
+		this.listMensagem = new List();
+		listMensagem.setBounds(199, 111, 375, 219);
+		contentPane.add(listMensagem);
 		
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.setBounds(485, 336, 89, 23);
 		contentPane.add(btnAtualizar);
+		
+		btnAtualizar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 	}
 	
 	public void listaUsersCadastrados ()
@@ -164,5 +173,10 @@ public class Servidor extends JFrame {
 			SerializadorUser.carregaUser();
 			for (int i=0; i < SerializadorUser.user.size(); i++)
 				listUsuarios.add(SerializadorUser.user.get(i).getNome());
+	}
+	
+	public void listMensagens () throws ClassNotFoundException, IOException
+	{
+		
 	}
 }
