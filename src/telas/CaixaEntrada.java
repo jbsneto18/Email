@@ -57,8 +57,13 @@ public class CaixaEntrada extends JPanel {
 					ArrayList<Mensagem> m = c.retornarEmails(tp.getUsuarioLogado());
 					
 					for (int i=0; i < m.size(); i++){
-						System.out.println(m.get(i).getTitulo());
+						list.add("                                                                         Mensagem "+ i);
+						list.add("Remetente:");
 						list.add(m.get(i).getTitulo());
+						list.add("\n");
+						list.add("Mensagem:");
+						list.add(m.get(i).getCorpo());
+						list.add("-------------------------------------------------------------------------------------------------------------------------------------------------------");
 					}
 					
 				} catch (ClassNotFoundException | IOException
