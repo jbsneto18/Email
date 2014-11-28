@@ -17,6 +17,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 
+import Serializador.Serializador;
 import Serializador.SerializadorUser;
 import mensagem.Cliente;
 import mensagem.Mensagem;
@@ -76,6 +77,7 @@ public class CaixaEntrada extends JPanel {
 							list.add(m.get(i).getCorpo());
 							list.add("-------------------------------------------------------------------------------------------------------------------------------------------------------");
 						}
+						Serializador.excluirTodasMensagens();
 						
 					} catch (ClassNotFoundException | IOException
 							| InterruptedException e) {
