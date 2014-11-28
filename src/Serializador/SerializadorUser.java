@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import CadastroUser.Cadastro;;
 
 public class SerializadorUser {
-	static ArrayList<Cadastro> user = new ArrayList<Cadastro>();
+	public static ArrayList<Cadastro> user = new ArrayList<Cadastro>();
 
 	public static void salvarUser() {
 
@@ -36,7 +36,7 @@ public class SerializadorUser {
 		}
 	}
 
-	public static ArrayList<Cadastro> carregaEmails() {
+	public static ArrayList<Cadastro> carregaCadastrados() {
 
 		FileInputStream arquivoLeitura;
 		ObjectInputStream output;
@@ -61,12 +61,6 @@ public class SerializadorUser {
 
 	public static void addUser(Cadastro cadastro) {
 		user.add(cadastro);
-	}
-	
-	public static void listaCadastro(){
-		for (int i = 0; i < user.size(); i++) { 
-			System.out.println(user.get(i).getNome()+"\n");
-		}
 	}
 
 }

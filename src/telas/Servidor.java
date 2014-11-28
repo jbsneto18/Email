@@ -12,15 +12,20 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 
 import Serializador.Serializador;
+import Serializador.SerializadorUser;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import mensagem.ServidorX;
 import mensagem.ServidorY;
+
 import java.awt.List;
 import java.awt.Scrollbar;
 import java.awt.Label;
@@ -32,6 +37,7 @@ public class Servidor extends JFrame {
 	private ServidorY servidorY;
 	private JButton btnAtivar;
 	private JButton btnDesligar;
+	private List listUsuarios;
 
 	/**
 	 * Launch the application.
@@ -75,9 +81,17 @@ public class Servidor extends JFrame {
 		btnAtivar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
+				try
+				{
+					leUsuariosCadastrados();
+				}
+				catch (Exception e1)
+				{
+					
+				}
+				
 				btnAtivar.setEnabled(false);
 				btnDesligar.setEnabled(true);
-				
 				
 				new Thread(new Runnable() {  
 				    @Override  
@@ -123,7 +137,7 @@ public class Servidor extends JFrame {
 		lblServidor.setFont(new Font("Arial", Font.BOLD, 18));
 		contentPane.add(lblServidor);
 		
-		List listUsuarios = new List();
+		this.listUsuarios = new List();
 		listUsuarios.setBounds(10, 111, 183, 240);
 		contentPane.add(listUsuarios);
 		
@@ -153,5 +167,17 @@ public class Servidor extends JFrame {
 		List list_1 = new List();
 		list_1.setBounds(388, 111, 183, 240);
 		contentPane.add(list_1);
+		
+	}
+	
+	public void leUsuariosCadastrados () throws FileNotFoundException, IOException
+	{
+		
+		SerializadorUser.carregaCadastrados();
+		String teste="", teste2="";
+		for (int i = 0; i < SerializadorUser.user.size(); i++) { 
+			teste = SerializadorUser.user.get(i).getNome()+"\n";
+			listUsuarios.add(teste);
+		}
 	}
 }
