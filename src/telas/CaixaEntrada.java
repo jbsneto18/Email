@@ -7,10 +7,16 @@ import java.awt.Font;
 import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JRadioButton;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
+
+import Serializador.SerializadorUser;
+import mensagem.Cliente;
+import mensagem.Mensagem;
 
 public class CaixaEntrada extends JPanel {
 
@@ -44,6 +50,24 @@ public class CaixaEntrada extends JPanel {
 		add(btnCancelar);
 		
 		JButton btnBuscar = new JButton("Buscar");
+		btnBuscar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Cliente c = new Cliente();
+				try {
+					ArrayList<Mensagem> m = c.retornarEmails(tp.getUsuarioLogado());
+					
+					for (int i=0; i < m.size(); i++){
+						System.out.println(m.get(i).getTitulo());
+						list.add(m.get(i).getTitulo());
+					}
+					
+				} catch (ClassNotFoundException | IOException
+						| InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
 		btnBuscar.setBounds(402, 334, 89, 23);
 		add(btnBuscar);
 		
