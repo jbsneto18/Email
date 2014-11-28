@@ -25,7 +25,7 @@ public class Inicio extends JFrame {
 	private JPanel contentPane;
 
 	private JTextField txtEmail;
-	private TelaPrincipal newTela = new TelaPrincipal();
+	private TelaPrincipal newTela = new TelaPrincipal("");
 
 	/**
 	 * Launch the application.
@@ -96,7 +96,7 @@ public class Inicio extends JFrame {
 				{
 					if (emailUser.equals(SerializadorUser.user.get(i).getEmail()))
 					{
-						newTela = new TelaPrincipal();
+						newTela = new TelaPrincipal(emailUser);
 						newTela.setVisible(true);
 						dispose();
 						status = 1;

@@ -20,7 +20,8 @@ import java.awt.Font;
 public class TelaPrincipal extends JFrame {
 
 	private JPanel contentPane;
-
+	public String email;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -28,7 +29,7 @@ public class TelaPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaPrincipal frame = new TelaPrincipal();
+					TelaPrincipal frame = new TelaPrincipal("");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -40,11 +41,13 @@ public class TelaPrincipal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaPrincipal() {
+	public TelaPrincipal(String emailUser) 
+	{
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		
+		this.email = emailUser;
 		
 		PainelPrincipal painelPrinc = new PainelPrincipal(this);
 		this.add(painelPrinc);

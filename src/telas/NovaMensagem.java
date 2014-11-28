@@ -1,9 +1,11 @@
 package telas;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
 import Serializador.Serializador;
+import Serializador.SerializadorUser;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -16,14 +18,15 @@ import javax.swing.JButton;
 import mensagem.Cliente;
 
 public class NovaMensagem extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
+	private JTextField txtRemetente;
+	private JTextField txtDestinatario;
+	private JTextField txtCorpo;
+	private JTextField txtTitulo;
 
 	/**
 	 * Create the panel.
 	 */
+	@SuppressWarnings("deprecation")
 	public NovaMensagem(final TelaPrincipal tp) {
 		setLayout(null);
 		
@@ -32,10 +35,12 @@ public class NovaMensagem extends JPanel {
 		lblNovaMensagem.setFont(new Font("Arial Black", Font.BOLD, 18));
 		add(lblNovaMensagem);
 		
-		textField = new JTextField();
-		textField.setBounds(10, 66, 191, 20);
-		add(textField);
-		textField.setColumns(10);
+		txtRemetente = new JTextField();
+		txtRemetente.setBounds(10, 66, 191, 20);
+		txtRemetente.setText(tp.email);
+		txtRemetente.enable(false);
+		add(txtRemetente);
+		txtRemetente.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Remetente:");
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -47,20 +52,20 @@ public class NovaMensagem extends JPanel {
 		lblDestinatrio.setBounds(233, 41, 73, 14);
 		add(lblDestinatrio);
 		
-		textField_1 = new JTextField();
-		textField_1.setBounds(230, 66, 210, 20);
-		add(textField_1);
-		textField_1.setColumns(10);
+		txtDestinatario = new JTextField();
+		txtDestinatario.setBounds(230, 66, 210, 20);
+		add(txtDestinatario);
+		txtDestinatario.setColumns(10);
 		
 		JLabel lblMensagem = new JLabel("Mensagem:");
 		lblMensagem.setFont(new Font("Arial", Font.PLAIN, 12));
 		lblMensagem.setBounds(10, 153, 73, 14);
 		add(lblMensagem);
 		
-		textField_2 = new JTextField();
-		textField_2.setBounds(10, 178, 580, 139);
-		add(textField_2);
-		textField_2.setColumns(10);
+		txtCorpo = new JTextField();
+		txtCorpo.setBounds(10, 178, 580, 139);
+		add(txtCorpo);
+		txtCorpo.setColumns(10);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(501, 328, 89, 23);
@@ -75,10 +80,10 @@ public class NovaMensagem extends JPanel {
 		lblTtulo.setBounds(10, 97, 46, 14);
 		add(lblTtulo);
 		
-		textField_3 = new JTextField();
-		textField_3.setBounds(10, 122, 302, 20);
-		add(textField_3);
-		textField_3.setColumns(10);
+		txtTitulo = new JTextField();
+		txtTitulo.setBounds(10, 122, 302, 20);
+		add(txtTitulo);
+		txtTitulo.setColumns(10);
 		
 		btnCancelar.addActionListener(new ActionListener() {
 			
@@ -93,20 +98,36 @@ public class NovaMensagem extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				
 				String remetente, destinatario, corpo, titulo;
-				remetente = textField.getText();
-				destinatario = textField_1.getText();
-				corpo = textField_2.getText();
-				titulo = textField_3.getText();
 				
-				try {
-					Cliente c = new Cliente(remetente, destinatario, corpo, titulo);
-				} catch (ClassNotFoundException | IOException
-						| InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				remetente = txtRemetente.getText();
+				destinatario = txtDestinatario.getText();
+				corpo = txtCorpo.getText();
+				titulo = txtTitulo.getText();
+				
+				if (!destinatario.equals("") || !corpo.equals("") || !titulo.equals(""))
+				{
+					SerializadorUser.carregaUser();
+				
+					for (int i=0; i< SerializadorUser.user.size(); i++)
+					{
+						if (destinatario.equals(SerializadorUser.user.get(i).getEmail()))
+						{
+							try {
+								Cliente c = new Cliente(remetente, destinatario, corpo, titulo);
+							} catch (ClassNotFoundException | IOException
+									| InterruptedException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						}
+						else
+							JOptionPane.showInternalMessageDialog(null, "Destinatario Desconhecido, forneça um destinatário válido!");
+					}
 				}
-				
+				else
+					JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente!");
 			}
 		});
 		
