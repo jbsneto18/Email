@@ -63,7 +63,7 @@ public class CadastroUsuario extends JPanel {
 				fp.dispose();
 			}
 		});
-		btnCancelar.setBounds(312, 221, 89, 23);
+		btnCancelar.setBounds(286, 221, 115, 23);
 		add(btnCancelar);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -91,7 +91,7 @@ public class CadastroUsuario extends JPanel {
 					JOptionPane.showMessageDialog(null, "Domínio inválido, @ikinho ou @apocalipse são os disponíveis!");
 			}
 		});
-		btnCadastrar.setBounds(192, 221, 110, 23);
+		btnCadastrar.setBounds(166, 221, 110, 23);
 		add(btnCadastrar);
 
 	}
