@@ -31,14 +31,17 @@ public class Cliente {
 		socket = new Socket(host.getHostName(), 9876);
 		oos = new ObjectOutputStream(socket.getOutputStream());
 		System.out.println("Sending request to Socket Server");
-		oos.writeObject(m);
+		
+		ClientEnviaMsg envia = new ClientEnviaMsg(oos, m);
+		new Thread(envia).start();
+		
 		// RESPOSTA DO SERVIDOR
 		ois = new ObjectInputStream(socket.getInputStream());
-		String retorno = (String) ois.readObject();
-		System.out.println(retorno);
+		ClientRecebMsg recebe = new ClientRecebMsg(ois);
 		// ///////////////////////////////////////////////////////////////
 		ois.close();
 		oos.close();
+		socket.close();
 
 		Thread.sleep(100);
 	}
@@ -54,15 +57,20 @@ public class Cliente {
 
 		socket = new Socket(host.getHostName(), 9876);
 		oos = new ObjectOutputStream(socket.getOutputStream());
-		oos.writeObject(email);//ENVIO P/ SERVIDOR
 		
+		ClientPedeEmails pede = new ClientPedeEmails(oos, email);
+
 		// RESPOSTA DO SERVIDOR É O ARRAY LIST COM OS EMAIL ESPECIFICOS DO USUARIO LOGADO
 		ois = new ObjectInputStream(socket.getInputStream());
+		
+		ClientLerEmails ler = new ClientLerEmails(ois);
+		
 		ArrayList<Mensagem> retorno = (ArrayList<Mensagem>) ois.readObject();
 		// ///////////////////////////////////////////////////////////////
 		ois.close();
 		oos.close();
-
+		socket.close();
+		
 		return retorno;
 
 	}
