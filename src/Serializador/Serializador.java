@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.sql.Savepoint;
 import java.util.ArrayList;
 
 import mensagem.Mensagem;
@@ -61,6 +62,13 @@ public class Serializador {
 
 	public static void addEmail(Mensagem mensagem) {
 		email.add(mensagem);
+	}
+	
+	public static void excluirTodasMensagens(){
+		while(!email.isEmpty()){  
+		    System.out.println(email.remove(0));
+		}
+		salvarEmail();
 	}
 	
 	public static void listaEmail(){
