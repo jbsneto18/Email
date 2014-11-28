@@ -1,5 +1,6 @@
 package telas;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
@@ -30,7 +31,7 @@ public class CadastroUsuario extends JPanel {
 	 */
 	public CadastroUsuario(TelaPrincipal fp) {
 		setLayout(null);
-		
+		SerializadorUser.carregaUser();
 		JLabel lblCadastroDeCliente = new JLabel("Cadastro de Usu\u00E1rio");
 		lblCadastroDeCliente.setFont(new Font("Arial", Font.BOLD, 18));
 		lblCadastroDeCliente.setBounds(190, 37, 188, 43);
@@ -78,6 +79,9 @@ public class CadastroUsuario extends JPanel {
 				Cadastro cad = new Cadastro(nome, email);
 				SerializadorUser.addUser(cad);
 				SerializadorUser.salvarUser();
+				
+				JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+				fp.getCancelarCaixaEntrada();
 			}
 		});
 		btnCadastrar.setBounds(192, 221, 110, 23);

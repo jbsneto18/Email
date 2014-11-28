@@ -36,7 +36,7 @@ public class SerializadorUser {
 		}
 	}
 
-	public static ArrayList<Cadastro> carregaEmails() {
+	public static ArrayList<Cadastro> carregaUser() {
 
 		FileInputStream arquivoLeitura;
 		ObjectInputStream output;
