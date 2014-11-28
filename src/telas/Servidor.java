@@ -151,17 +151,8 @@ public class Servidor extends JFrame {
 		contentPane.add(lblMensagem);
 		
 		List list = new List();
-		list.setBounds(199, 111, 183, 240);
+		list.setBounds(199, 111, 375, 240);
 		contentPane.add(list);
-		
-		Label lblConectado = new Label("Conectados");
-		lblConectado.setFont(new Font("Arial", Font.BOLD, 12));
-		lblConectado.setBounds(389, 83, 80, 22);
-		contentPane.add(lblConectado);
-		
-		List list_1 = new List();
-		list_1.setBounds(388, 111, 183, 240);
-		contentPane.add(list_1);
 	}
 	
 	public void listaUsersCadastrados ()
