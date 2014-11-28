@@ -69,6 +69,7 @@ public class TelaPrincipal extends JFrame {
 		this.dispose();
 	}
 	
+	
 	public void getCancelarCaixaEntrada(){
 		this.getContentPane().removeAll();
 		PainelPrincipal painelPrinc = new PainelPrincipal(this);
