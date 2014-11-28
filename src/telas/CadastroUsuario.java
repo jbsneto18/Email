@@ -76,12 +76,19 @@ public class CadastroUsuario extends JPanel {
 				nome = txtNome.getText();
 				email = txtEmail.getText();
 				
-				Cadastro cad = new Cadastro(nome, email);
-				SerializadorUser.addUser(cad);
-				SerializadorUser.salvarUser();
+				String splitEmail[] = email.split("@");
 				
-				JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
-				fp.getCancelarCaixaEntrada();
+				if (splitEmail[1].equals("apocalipse") || splitEmail[1].equals("ikinho"))
+				{
+					Cadastro cad = new Cadastro(nome, email);
+					SerializadorUser.addUser(cad);
+					SerializadorUser.salvarUser();
+					
+					JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+					fp.getCancelarCaixaEntrada();
+				}
+				else
+					JOptionPane.showMessageDialog(null, "Domínio inválido, @ikinho ou @apocalipse são os disponíveis!");
 			}
 		});
 		btnCadastrar.setBounds(192, 221, 110, 23);

@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import mensagem.Mensagem;
 
 public class Serializador {
-	static ArrayList<Mensagem> email = new ArrayList<Mensagem>();
+	public static ArrayList<Mensagem> email = new ArrayList<Mensagem>();
 
 	public static void salvarEmail() {
 
