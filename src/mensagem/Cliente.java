@@ -26,14 +26,15 @@ public class Cliente {
 		socket = new Socket(host.getHostName(), 9876);
 		oos = new ObjectOutputStream(socket.getOutputStream());
 		System.out.println("Sending request to Socket Server");
-		oos.writeObject(m);
+		
+		ClientEnviaMsg envia = new ClientEnviaMsg(oos, m);
+		new Thread(envia).start();;
 		
 		ois = new ObjectInputStream(socket.getInputStream());
-		String retorno = (String) ois.readObject();
-		System.out.println(retorno);
+		ClientRecebMsg recebe =  new ClientRecebMsg(ois);
+		new Thread(recebe).start();
 
-		ois.close();
-		oos.close();
+		socket.close();
 
 		Thread.sleep(100);
 
