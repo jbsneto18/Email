@@ -23,11 +23,11 @@ public class ServidorX {
 			ObjectInputStream ois = new ObjectInputStream(
 					socket.getInputStream());
 
-			Object dados = ois.readObject();
+			Requisicoes dados = (Requisicoes) ois.readObject();
 
-			if (dados instanceof Mensagem) {
+			if (dados.getRequisicao().equals("enviar") ) {
 
-				Mensagem message = (Mensagem) dados;
+				Mensagem message = (Mensagem) dados.getMensagem();
 				Serializador.addEmail(message);
 
 				System.out.println("Mensagem recebida!\n remetente: "
@@ -44,13 +44,21 @@ public class ServidorX {
 				socket.close();
 			}
 
-			if (dados instanceof String) {//Nesta String eu estou recebendo o nome do usuario para consultar e enviar
+			if (dados.getRequisicao().equals("lerMsgs")) {//Nesta String eu estou recebendo o nome do usuario para consultar e enviar
 
-				String emailUsuario = (String) dados;
+				String emailUsuario = (String) dados.getEmail();
 				ArrayList<Mensagem> m = new ArrayList<Mensagem>();
 				for(int i = 0; i < Serializador.email.size(); i++){
 					if(Serializador.email.get(i).getDestinatario().equals(emailUsuario)){
 						m.add(Serializador.email.get(i));
+					}
+				}
+				
+				for(int i = 0; i < Serializador.email.size(); i++){
+					if(Serializador.email.get(i).getDestinatario().equals(emailUsuario)){
+						Serializador.email.remove(i);
+						i = i-1;
+						//i = 0;//poderia ser assim mas nao sei como o array list reorganiza
 					}
 				}
 				
@@ -61,6 +69,32 @@ public class ServidorX {
 				oos.close();
 				socket.close();
 			}
+			
+			if (dados.getRequisicao().equals("lerMsg")) {//Nesta String eu estou recebendo o nome do usuario para consultar e enviar
+				int flag = 0;
+				int indice = 0;
+				String emailUsuario = (String) dados.getEmail();
+				ArrayList<Mensagem> m = new ArrayList<Mensagem>();
+				for(int i = 0; i < Serializador.email.size(); i++){
+					if(Serializador.email.get(i).getDestinatario().equals(emailUsuario)){
+						m.add(Serializador.email.get(i));
+						flag = 1;
+						indice = i;
+					}
+				}
+				
+				if(flag==1){
+					Serializador.email.remove(indice);
+				}
+				
+				ObjectOutputStream oos = new ObjectOutputStream(
+						socket.getOutputStream());
+				oos.writeObject(m.get(m.size()-1));
+				ois.close();
+				oos.close();
+				socket.close();
+			}
+
 
 			// if(message.equalsIgnoreCase("exit")) break;
 		}

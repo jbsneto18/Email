@@ -37,7 +37,7 @@ public class Cliente {
 		
 		// RESPOSTA DO SERVIDOR
 		ois = new ObjectInputStream(socket.getInputStream());
-		ClientRecebMsg recebe = new ClientRecebMsg(ois);
+		String x = (String) ois.readObject();
 		// ///////////////////////////////////////////////////////////////
 		ois.close();
 		oos.close();
@@ -64,9 +64,40 @@ public class Cliente {
 		// RESPOSTA DO SERVIDOR É O ARRAY LIST COM OS EMAIL ESPECIFICOS DO USUARIO LOGADO
 		ois = new ObjectInputStream(socket.getInputStream());
 		
-		ClientLerEmails ler = new ClientLerEmails(ois);
+		//ClientLerEmails ler = new ClientLerEmails(ois);
 		
 		ArrayList<Mensagem> retorno = (ArrayList<Mensagem>) ois.readObject();
+		// ///////////////////////////////////////////////////////////////
+		ois.close();
+		oos.close();
+		socket.close();
+		
+		return retorno;
+
+	}
+	
+	public Mensagem retornarEmail(String email)
+			throws UnknownHostException, IOException, ClassNotFoundException,
+			InterruptedException {
+		
+		InetAddress host = InetAddress.getLocalHost();
+		Socket socket = null;
+		ObjectOutputStream oos = null;
+		ObjectInputStream ois = null;
+
+		socket = new Socket(host.getHostName(), 9876);
+		oos = new ObjectOutputStream(socket.getOutputStream());
+		
+		ClientRecebMsg pede = new ClientRecebMsg(oos, email);
+		new Thread(pede).start();
+
+		// RESPOSTA DO SERVIDOR É O ARRAY LIST COM OS EMAIL ESPECIFICOS DO USUARIO LOGADO
+		ois = new ObjectInputStream(socket.getInputStream());
+		
+		//ClientLerEmails ler = new ClientLerEmails(ois);
+		
+		Mensagem retorno = (Mensagem) ois.readObject();
+
 		// ///////////////////////////////////////////////////////////////
 		ois.close();
 		oos.close();

@@ -63,8 +63,6 @@ public class Serializador {
 	public static void addEmail(Mensagem mensagem) {
 		email.add(mensagem);
 	}
-<<<<<<< HEAD
-=======
 	
 	public static void excluirTodasMensagens(){
 		while(!email.isEmpty()){  
@@ -79,5 +77,4 @@ public class Serializador {
 		}
 	}
 
->>>>>>> b791ed6f8f45ac0cdc2ea7eeec1408082634b283
 }

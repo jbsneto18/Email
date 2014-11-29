@@ -77,8 +77,7 @@ public class CaixaEntrada extends JPanel {
 							list.add(m.get(i).getCorpo());
 							list.add("-------------------------------------------------------------------------------------------------------------------------------------------------------");
 						}
-						Serializador.excluirTodasMensagens();
-						
+												
 					} catch (ClassNotFoundException | IOException
 							| InterruptedException e) {
 						// TODO Auto-generated catch block
@@ -93,16 +92,15 @@ public class CaixaEntrada extends JPanel {
 					
 					try
 					{
-						ArrayList<Mensagem> m = c.retornarEmails(tp.getUsuarioLogado());
+						Mensagem m = c.retornarEmail(tp.getUsuarioLogado());
 						
-						tam = m.size();
 						list.removeAll();
 						list.add("                                                                         Mensagem "+ tam);
 						list.add("Remetente:");
-						list.add(m.get(tam-1).getTitulo());
+						list.add(m.getTitulo());
 						list.add("\n");
 						list.add("Mensagem:");
-						list.add(m.get(tam-1).getCorpo());
+						list.add(m.getCorpo());
 						
 					}catch (Exception e) {}
 				}
