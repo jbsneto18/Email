@@ -6,8 +6,11 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.JButton;
+
+import mensagem.Cliente;
 
 public class PainelPrincipal extends JPanel {
 
@@ -22,16 +25,32 @@ public class PainelPrincipal extends JPanel {
 		add(lblNewLabel);
 		
 		JButton btnCaixaDeEntrada = new JButton("Caixa de Entrada");
-		btnCaixaDeEntrada.setBounds(217, 170, 140, 23);
+		btnCaixaDeEntrada.setBounds(217, 155, 140, 23);
 		add(btnCaixaDeEntrada);
 		
 		JButton btnNovaMensagem = new JButton("Nova Mensagem");
-		btnNovaMensagem.setBounds(217, 204, 140, 23);
+		btnNovaMensagem.setBounds(217, 189, 140, 23);
 		add(btnNovaMensagem);
 		
 		JButton btnSair = new JButton("Sair");
-		btnSair.setBounds(217, 238, 140, 23);
+		btnSair.setBounds(217, 257, 140, 23);
 		add(btnSair);
+		
+		JButton btnExcluirme = new JButton("Excluir-me");
+		btnExcluirme.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Cliente c = new Cliente();
+				try {
+					c.excluirUsuario(tp.getUsuarioLogado());
+				} catch (ClassNotFoundException | IOException
+						| InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		btnExcluirme.setBounds(217, 223, 140, 23);
+		add(btnExcluirme);
 		
 		btnCaixaDeEntrada.addActionListener(new ActionListener() {
 			
@@ -61,5 +80,4 @@ public class PainelPrincipal extends JPanel {
 		});
 
 	}
-
 }

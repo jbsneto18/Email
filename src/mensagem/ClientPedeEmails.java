@@ -17,7 +17,7 @@ public class ClientPedeEmails implements Runnable {
 	public void run() {
 		
 		try {
-			Requisicoes r = new Requisicoes("lerMsgs", this.email, null);
+			Requisicoes r = new Requisicoes("lerMsgs", this.email, null, null);
 			oos.writeObject(r);//ENVIO P/ SERVIDOR
 		} catch (IOException e) {
 			e.printStackTrace();

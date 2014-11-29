@@ -17,7 +17,7 @@ public class ClientEnviaMsg implements Runnable{
 	@Override
 	public void run() {
 		try {
-			Requisicoes r = new Requisicoes("enviar", null, m);
+			Requisicoes r = new Requisicoes("enviar", null, m,null);
 			oos.writeObject(r);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

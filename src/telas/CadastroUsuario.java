@@ -81,8 +81,15 @@ public class CadastroUsuario extends JPanel {
 				if (splitEmail[1].equals("apocalipse") || splitEmail[1].equals("ikinho"))
 				{
 					Cadastro cad = new Cadastro(nome, email);
-					SerializadorUser.addUser(cad);
-					SerializadorUser.salvarUser();
+					Cliente c = new Cliente();
+					try {
+						c.cadastrarUsuario(cad);
+					} catch (ClassNotFoundException | IOException
+							| InterruptedException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 					
 					JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
 					fp.getCancelarCaixaEntrada();

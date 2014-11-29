@@ -16,7 +16,7 @@ public class ClientRecebMsg implements Runnable {
 
 	@Override
 	public void run() {
-		Requisicoes r = new Requisicoes("lerMsg", email, null);
+		Requisicoes r = new Requisicoes("lerMsg", email, null, null);
 		try {
 			oos.writeObject(r);
 		} catch (IOException e1) {

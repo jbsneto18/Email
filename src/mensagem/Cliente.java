@@ -8,6 +8,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+import CadastroUser.Cadastro;
+
 public class Cliente {
 
 	public Cliente() {
@@ -97,6 +99,69 @@ public class Cliente {
 		//ClientLerEmails ler = new ClientLerEmails(ois);
 		
 		Mensagem retorno = (Mensagem) ois.readObject();
+
+		// ///////////////////////////////////////////////////////////////
+		ois.close();
+		oos.close();
+		socket.close();
+		
+		return retorno;
+
+	}
+
+	public String cadastrarUsuario(Cadastro user)
+			throws UnknownHostException, IOException, ClassNotFoundException,
+			InterruptedException {
+		
+		InetAddress host = InetAddress.getLocalHost();
+		Socket socket = null;
+		ObjectOutputStream oos = null;
+		ObjectInputStream ois = null;
+
+		socket = new Socket(host.getHostName(), 9876);
+		oos = new ObjectOutputStream(socket.getOutputStream());
+		
+		Requisicoes r = new Requisicoes("cadastroUser", null, null, user);
+		oos.writeObject(r);
+		
+		// RESPOSTA DO SERVIDOR É O ARRAY LIST COM OS EMAIL ESPECIFICOS DO USUARIO LOGADO
+		ois = new ObjectInputStream(socket.getInputStream());
+		
+		//ClientLerEmails ler = new ClientLerEmails(ois);
+		
+		String retorno = (String) ois.readObject();
+
+		// ///////////////////////////////////////////////////////////////
+		ois.close();
+		oos.close();
+		socket.close();
+		
+		return retorno;
+
+	}
+	
+
+	public String excluirUsuario(String email)
+			throws UnknownHostException, IOException, ClassNotFoundException,
+			InterruptedException {
+		
+		InetAddress host = InetAddress.getLocalHost();
+		Socket socket = null;
+		ObjectOutputStream oos = null;
+		ObjectInputStream ois = null;
+
+		socket = new Socket(host.getHostName(), 9876);
+		oos = new ObjectOutputStream(socket.getOutputStream());
+		
+		Requisicoes r = new Requisicoes("excluirUser", email, null, null);
+		oos.writeObject(r);
+		
+		// RESPOSTA DO SERVIDOR É O ARRAY LIST COM OS EMAIL ESPECIFICOS DO USUARIO LOGADO
+		ois = new ObjectInputStream(socket.getInputStream());
+		
+		//ClientLerEmails ler = new ClientLerEmails(ois);
+		
+		String retorno = (String) ois.readObject();
 
 		// ///////////////////////////////////////////////////////////////
 		ois.close();

@@ -8,7 +8,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 
 import mensagem.Mensagem;
+import CadastroUser.Cadastro;
 import Serializador.Serializador;
+import Serializador.SerializadorUser;
 
 public class ServidorX {
 	private ServerSocket server;
@@ -25,7 +27,7 @@ public class ServidorX {
 
 			Requisicoes dados = (Requisicoes) ois.readObject();
 
-			if (dados.getRequisicao().equals("enviar") ) {
+			if (dados.getRequisicao().equals("enviar")) {
 
 				Mensagem message = (Mensagem) dados.getMensagem();
 				Serializador.addEmail(message);
@@ -44,24 +46,31 @@ public class ServidorX {
 				socket.close();
 			}
 
-			if (dados.getRequisicao().equals("lerMsgs")) {//Nesta String eu estou recebendo o nome do usuario para consultar e enviar
+			if (dados.getRequisicao().equals("lerMsgs")) {// Nesta String eu
+															// estou recebendo o
+															// nome do usuario
+															// para consultar e
+															// enviar
 
 				String emailUsuario = (String) dados.getEmail();
 				ArrayList<Mensagem> m = new ArrayList<Mensagem>();
-				for(int i = 0; i < Serializador.email.size(); i++){
-					if(Serializador.email.get(i).getDestinatario().equals(emailUsuario)){
+				for (int i = 0; i < Serializador.email.size(); i++) {
+					if (Serializador.email.get(i).getDestinatario()
+							.equals(emailUsuario)) {
 						m.add(Serializador.email.get(i));
 					}
 				}
-				
-				for(int i = 0; i < Serializador.email.size(); i++){
-					if(Serializador.email.get(i).getDestinatario().equals(emailUsuario)){
+
+				for (int i = 0; i < Serializador.email.size(); i++) {
+					if (Serializador.email.get(i).getDestinatario()
+							.equals(emailUsuario)) {
 						Serializador.email.remove(i);
-						i = i-1;
-						//i = 0;//poderia ser assim mas nao sei como o array list reorganiza
+						i = i - 1;
+						// i = 0;//poderia ser assim mas nao sei como o array
+						// list reorganiza
 					}
 				}
-				
+
 				ObjectOutputStream oos = new ObjectOutputStream(
 						socket.getOutputStream());
 				oos.writeObject(m);
@@ -69,32 +78,76 @@ public class ServidorX {
 				oos.close();
 				socket.close();
 			}
-			
-			if (dados.getRequisicao().equals("lerMsg")) {//Nesta String eu estou recebendo o nome do usuario para consultar e enviar
+
+			if (dados.getRequisicao().equals("lerMsg")) {// Nesta String eu
+															// estou recebendo o
+															// nome do usuario
+															// para consultar e
+															// enviar
 				int flag = 0;
 				int indice = 0;
 				String emailUsuario = (String) dados.getEmail();
 				ArrayList<Mensagem> m = new ArrayList<Mensagem>();
-				for(int i = 0; i < Serializador.email.size(); i++){
-					if(Serializador.email.get(i).getDestinatario().equals(emailUsuario)){
+				for (int i = 0; i < Serializador.email.size(); i++) {
+					if (Serializador.email.get(i).getDestinatario()
+							.equals(emailUsuario)) {
 						m.add(Serializador.email.get(i));
 						flag = 1;
 						indice = i;
 					}
 				}
-				
-				if(flag==1){
+
+				if (flag == 1) {
 					Serializador.email.remove(indice);
 				}
-				
+
 				ObjectOutputStream oos = new ObjectOutputStream(
 						socket.getOutputStream());
-				oos.writeObject(m.get(m.size()-1));
+				if (m.size() - 1 == -1) {
+					oos.writeObject(null);
+				} else {
+					oos.writeObject(m.get(m.size() - 1));
+				}
 				ois.close();
 				oos.close();
 				socket.close();
 			}
 
+			if (dados.getRequisicao().equals("cadastroUser")) {
+
+				Cadastro c = (Cadastro) dados.getCadastro();
+				SerializadorUser.addUser(c);
+				SerializadorUser.salvarUser();
+
+				ObjectOutputStream oos = new ObjectOutputStream(
+						socket.getOutputStream());
+				oos.writeObject("Ok");
+				ois.close();
+				oos.close();
+				socket.close();
+			}
+
+			if (dados.getRequisicao().equals("excluirUser")) {
+
+				String email = dados.getEmail();
+				SerializadorUser.carregaUser();
+				
+				for(int i=0; i < SerializadorUser.user.size(); i++){
+					if(SerializadorUser.user.get(i).getEmail().equals(email)){
+						SerializadorUser.user.remove(i);
+						break;
+					}
+				}
+				
+				SerializadorUser.salvarUser();
+				
+				ObjectOutputStream oos = new ObjectOutputStream(
+						socket.getOutputStream());
+				oos.writeObject("Ok");
+				ois.close();
+				oos.close();
+				socket.close();
+			}
 
 			// if(message.equalsIgnoreCase("exit")) break;
 		}

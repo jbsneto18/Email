@@ -2,18 +2,30 @@ package mensagem;
 
 import java.io.Serializable;
 
+import CadastroUser.Cadastro;
+
 public class Requisicoes implements Serializable {
 
 	private String requisicao;
 	private String email;
 	private Mensagem mensagem;
+	private Cadastro cadastro;
 	
-	public Requisicoes(String requisicao, String email, Mensagem m) {		
+	public Requisicoes(String requisicao, String email, Mensagem m, Cadastro c) {		
 		this.requisicao = requisicao;
 		this.email = email;
 		this.mensagem = m;
+		this.cadastro = c;
 	}
 		
+	public Cadastro getCadastro(){
+		return this.cadastro;
+	}
+	
+	public void setCadastro(Cadastro c){
+		this.cadastro = c;
+	}
+	
 	public String getRequisicao() {
 		return requisicao;
 	}
