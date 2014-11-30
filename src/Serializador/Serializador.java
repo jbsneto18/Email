@@ -11,24 +11,41 @@ import java.util.ArrayList;
 import mensagem.Mensagem;
 
 public class Serializador {
+	
 	public static ArrayList<Mensagem> email = new ArrayList<Mensagem>();
-
-	public static void salvarEmail() {
-
+	public static ArrayList<Mensagem> emailB = new ArrayList<Mensagem>();
+	
+	private static String dominio;
+	
+	public static void salvarEmail(String domin) {
+		
 		FileOutputStream arquivo;
 		ObjectOutputStream output;
-
-		File file = new File("cadastroEmail.bin");
+		String nomeArquivo;
+		
+		if (domin.equals("apocalipse"))
+		{
+			dominio = "apocalipse"; nomeArquivo = "cadastroEmail.bin";
+		}
+		else
+		{
+			dominio = "ikinho"; nomeArquivo = "cadastroEmailB.bin";
+		}
+		
+		File file = new File(nomeArquivo);
 
 		try {
 			if (!file.exists()) {
 				file.createNewFile();
 			}
 
-			arquivo = new FileOutputStream("cadastroEmail.bin");
+			arquivo = new FileOutputStream(nomeArquivo);
 			output = new ObjectOutputStream(arquivo);
-
-			output.writeObject(email);
+			
+			if (domin.equals("apocalipse"))
+				output.writeObject(email);
+			else
+				output.writeObject(emailB);
 
 			output.close();
 			arquivo.close();
@@ -37,38 +54,59 @@ public class Serializador {
 		}
 	}
 
-	public static ArrayList<Mensagem> carregaEmails() {
+	public static ArrayList<Mensagem> carregaEmails(String domin) {
 
 		FileInputStream arquivoLeitura;
 		ObjectInputStream output;
-
-		File arquivo = new File("cadastroEmail.bin");
+		
+		String nomeArquivo;
+		
+		if (domin.equals("apocalipse"))
+			nomeArquivo = "cadastroEmail.bin";
+		else
+			nomeArquivo = "cadastroEmailB.bin";
+		
+		File arquivo = new File(nomeArquivo);
 
 		try {
 			if (!arquivo.exists()) {
 				arquivo.createNewFile();
-				return email;
+				if (domin.equals("apocalipse"))
+					return email;
+				else
+					return emailB;
+			}
+			else
+			{
+				arquivoLeitura = new FileInputStream(nomeArquivo);
+				output = new ObjectInputStream(arquivoLeitura);
+
+				if (domin.equals("apocalipse"))
+					return email = (ArrayList<Mensagem>) output.readObject();
+				else
+					return emailB = (ArrayList<Mensagem>) output.readObject();
 			}
 
-			arquivoLeitura = new FileInputStream("cadastroEmail.bin");
-			output = new ObjectInputStream(arquivoLeitura);
 
-			email = (ArrayList<Mensagem>) output.readObject();
 		} catch (Exception e) {
 			e.getMessage();
 		}
 		return email;
 	}
 
-	public static void addEmail(Mensagem mensagem) {
-		email.add(mensagem);
+	public static void addEmail(Mensagem mensagem, String domin) 
+	{	
+		if (domin.equals("apocalipse"))
+			email.add(mensagem);
+		else
+			emailB.add(mensagem);
 	}
 	
 	public static void excluirTodasMensagens(){
 		while(!email.isEmpty()){  
 		    System.out.println(email.remove(0));
 		}
-		salvarEmail();
+		salvarEmail(dominio);
 	}
 	
 	public static void listaEmail(){

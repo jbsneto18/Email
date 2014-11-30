@@ -33,17 +33,44 @@ public class ThreadLerMsg implements Runnable {
 		int indice = 0;
 		String emailUsuario = (String) dados.getEmail();
 		ArrayList<Mensagem> m = new ArrayList<Mensagem>();
-		for (int i = 0; i < Serializador.email.size(); i++) {
-			if (Serializador.email.get(i).getDestinatario()
-					.equals(emailUsuario)) {
-				m.add(Serializador.email.get(i));
-				flag = 1;
-				indice = i;
+		
+		if (dados.getDominio().equals("apocalipse"))
+		{
+			for (int i = 0; i < Serializador.email.size(); i++) 
+			{
+				if (Serializador.email.get(i).getDestinatario()
+						.equals(emailUsuario)) {
+					m.add(Serializador.email.get(i));
+					flag = 1;
+					indice = i;
+					break;
+				}
+			}
+			
+			if (flag == 1) 
+			{
+				Serializador.email.remove(indice);
+				Serializador.salvarEmail(dados.getDominio());
 			}
 		}
-
-		if (flag == 1) {
-			Serializador.email.remove(indice);
+		else
+		{
+			for (int i = 0; i < Serializador.emailB.size(); i++) 
+			{
+				if (Serializador.emailB.get(i).getDestinatario()
+						.equals(emailUsuario)) {
+					m.add(Serializador.emailB.get(i));
+					flag = 1;
+					indice = i;
+					break;
+				}
+			}
+			
+			if (flag == 1) 
+			{
+				Serializador.emailB.remove(indice);
+				Serializador.salvarEmail(dados.getDominio());
+			}
 		}
 
 		try {
@@ -52,11 +79,13 @@ public class ThreadLerMsg implements Runnable {
 				ois.close();
 				oos.close();
 				socket.close();
+				Serializador.salvarEmail(dados.getDominio());
 			} else {
 				oos.writeObject(m.get(m.size() - 1));
 				ois.close();
 				oos.close();
 				socket.close();
+				Serializador.salvarEmail(dados.getDominio());
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

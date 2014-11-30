@@ -10,12 +10,14 @@ public class Requisicoes implements Serializable {
 	private String email;
 	private Mensagem mensagem;
 	private Cadastro cadastro;
+	private String dominio;
 	
-	public Requisicoes(String requisicao, String email, Mensagem m, Cadastro c) {		
+	public Requisicoes(String requisicao, String email, Mensagem m, Cadastro c, String domin) {		
 		this.requisicao = requisicao;
 		this.email = email;
 		this.mensagem = m;
 		this.cadastro = c;
+		this.dominio = domin;
 	}
 		
 	public Cadastro getCadastro(){
@@ -45,7 +47,14 @@ public class Requisicoes implements Serializable {
 		this.mensagem = m;
 	}
 	
+	public void setDominio (String domin)
+	{
+		this.dominio = domin;
+	}
 	
-	
+	public String getDominio ()
+	{
+		return this.dominio;
+	}
 	
 }

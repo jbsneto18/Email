@@ -7,27 +7,40 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
-import CadastroUser.Cadastro;;
+import CadastroUser.Cadastro;
+
+;
 
 public class SerializadorUser {
-	public static ArrayList<Cadastro> user = new ArrayList<Cadastro>();
 
-	public static void salvarUser() {
+	public static ArrayList<Cadastro> user = new ArrayList<Cadastro>();
+	public static ArrayList<Cadastro> userB = new ArrayList<Cadastro>();
+
+	public static void salvarUser(String domin) {
 
 		FileOutputStream arquivo;
 		ObjectOutputStream output;
+		String nomeArquivo;
 
-		File file = new File("usuariosCadastrados.bin");
+		if (domin.equals("apocalipse"))
+			nomeArquivo = "usuariosCadastrados.bin";
+		else
+			nomeArquivo = "usuariosCadastradosB.bin";
+
+		File file = new File(nomeArquivo);
 
 		try {
 			if (!file.exists()) {
 				file.createNewFile();
 			}
 
-			arquivo = new FileOutputStream("usuariosCadastrados.bin");
+			arquivo = new FileOutputStream(nomeArquivo);
 			output = new ObjectOutputStream(arquivo);
 
-			output.writeObject(user);
+			if (domin.equals("apocalipse"))
+				output.writeObject(user);
+			else
+				output.writeObject(userB);
 
 			output.close();
 			arquivo.close();
@@ -36,30 +49,56 @@ public class SerializadorUser {
 		}
 	}
 
-	public static ArrayList<Cadastro> carregaUser() {
+	public static ArrayList<Cadastro> carregaUser(String domin) {
 
 		FileInputStream arquivoLeitura;
 		ObjectInputStream output;
+		
+		String nomeArquivo;
 
-		File arquivo = new File("usuariosCadastrados.bin");
+		if (domin.equals("apocalipse"))
+			nomeArquivo = "usuariosCadastrados.bin";
+		else
+			nomeArquivo = "usuariosCadastradosB.bin";
+		
+		File arquivo = new File(nomeArquivo);
 
 		try {
 			if (!arquivo.exists()) {
 				arquivo.createNewFile();
-				return user;
+				
+				if (domin.equals("apocalipse"))
+					return user;
+				else
+					return userB;
 			}
-
-			arquivoLeitura = new FileInputStream("usuariosCadastrados.bin");
-			output = new ObjectInputStream(arquivoLeitura);
-
-			user = (ArrayList<Cadastro>) output.readObject();
+			else
+			{
+				
+				arquivoLeitura = new FileInputStream(nomeArquivo);
+				
+				output = new ObjectInputStream(arquivoLeitura);
+				
+				if (domin.equals("apocalipse"))
+				{
+					user = (ArrayList<Cadastro>) output.readObject();
+					return user;
+				}
+				else
+					userB = (ArrayList<Cadastro>) output.readObject();
+					return userB;
+			}
+			
 		} catch (Exception e) {
 			e.getMessage();
 		}
 		return user;
 	}
 
-	public static void addUser(Cadastro cadastro) {
-		user.add(cadastro);
+	public static void addUser(Cadastro cadastro, String domin) {
+		if (domin.equals("apocalipse"))
+			user.add(cadastro);
+		else
+			userB.add(cadastro);
 	}
 }

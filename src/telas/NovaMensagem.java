@@ -98,7 +98,7 @@ public class NovaMensagem extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				String remetente, destinatario, corpo, titulo;
+				String remetente, destinatario, corpo, titulo, dominio;
 				
 				remetente = txtRemetente.getText();
 				destinatario = txtDestinatario.getText();
@@ -110,22 +110,53 @@ public class NovaMensagem extends JPanel {
 					
 					int status = 0;
 					
-					SerializadorUser.carregaUser();
-				
-					for (int i=0; i< SerializadorUser.user.size(); i++)
+					String splitEmailDest [] = destinatario.split("@");
+					
+					if (splitEmailDest[1].equals("apocalipse"))
 					{
-						if (destinatario.equals(SerializadorUser.user.get(i).getEmail()))
+						dominio = "apocalipse";
+						
+						SerializadorUser.carregaUser(dominio);
+						
+						for (int i=0; i< SerializadorUser.user.size(); i++)
 						{
-							try {
-								Cliente c = new Cliente();
-								c.cadastrarEmail(remetente, destinatario, corpo, titulo);
-								status = 1;
-								tp.getCancelarCaixaEntrada();
-								break;
-							} catch (ClassNotFoundException | IOException
-									| InterruptedException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
+							if (destinatario.equals(SerializadorUser.user.get(i).getEmail()))
+							{
+								try {
+									Cliente c = new Cliente();
+									c.cadastrarEmail(remetente, destinatario, corpo, titulo, dominio);
+									status = 1;
+									tp.getCancelarCaixaEntrada();
+									break;
+								} catch (ClassNotFoundException | IOException
+										| InterruptedException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+							}
+						}
+					}
+					else
+					{
+						dominio = "ikinho";
+						
+						SerializadorUser.carregaUser(dominio);
+						
+						for (int i=0; i< SerializadorUser.userB.size(); i++)
+						{
+							if (destinatario.equals(SerializadorUser.userB.get(i).getEmail()))
+							{
+								try {
+									Cliente c = new Cliente();
+									c.cadastrarEmail(remetente, destinatario, corpo, titulo, dominio);
+									status = 1;
+									tp.getCancelarCaixaEntrada();
+									break;
+								} catch (ClassNotFoundException | IOException
+										| InterruptedException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
 							}
 						}
 					}

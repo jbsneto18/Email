@@ -32,12 +32,10 @@ public class ThreadCadastroUser implements Runnable {
 	@Override
 	public synchronized void run() {
 
-		
-
 		try {
 			Cadastro c = (Cadastro) dados.getCadastro();
-			SerializadorUser.addUser(c);
-			SerializadorUser.salvarUser();
+			SerializadorUser.addUser(c, dados.getDominio());
+			SerializadorUser.salvarUser(dados.getDominio());
 			oos.writeObject("Ok");
 			oos.close();
 			ois.close();

@@ -30,7 +30,7 @@ public class ThreadExcluirUser implements Runnable {
 	public void run() {
 
 		String email = dados.getEmail();
-		SerializadorUser.carregaUser();
+		SerializadorUser.carregaUser(dados.getDominio());
 
 		for (int i = 0; i < SerializadorUser.user.size(); i++) {
 			if (SerializadorUser.user.get(i).getEmail().equals(email)) {
@@ -39,7 +39,7 @@ public class ThreadExcluirUser implements Runnable {
 			}
 		}
 
-		SerializadorUser.salvarUser();
+		SerializadorUser.salvarUser(dados.getDominio());
 
 		try {
 			oos.writeObject("Ok");

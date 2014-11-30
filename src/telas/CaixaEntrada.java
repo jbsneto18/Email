@@ -66,17 +66,28 @@ public class CaixaEntrada extends JPanel {
 				{
 					Cliente c = new Cliente();
 					try {
-						ArrayList<Mensagem> m = c.retornarEmails(tp.getUsuarioLogado());
+						
+						String dominio = tp.getDominio();
+						
+						ArrayList<Mensagem> m = c.retornarEmails(tp.getUsuarioLogado(), dominio);
 						list.removeAll();
-						for (int i=0; i < m.size(); i++){
-							list.add("                                                                         Mensagem "+ i);
-							list.add("Remetente:");
-							list.add(m.get(i).getTitulo());
-							list.add("\n");
-							list.add("Mensagem:");
-							list.add(m.get(i).getCorpo());
-							list.add("-------------------------------------------------------------------------------------------------------------------------------------------------------");
+						
+						if (m.size() > 0)
+						{
+							for (int i=0; i < m.size(); i++)
+							{
+								list.add("                                                                         Mensagem "+ i);
+								list.add("Remetente:");
+								list.add(m.get(i).getRemetente());
+								list.add("Título:");
+								list.add(m.get(i).getTitulo());
+								list.add("Mensagem:");
+								list.add(m.get(i).getCorpo());
+								list.add("-------------------------------------------------------------------------------------------------------------------------------------------------------");
+							}
 						}
+						else
+							JOptionPane.showMessageDialog(null, "Nenhuma mensagem no servidor!");
 												
 					} catch (ClassNotFoundException | IOException
 							| InterruptedException e) {
@@ -88,20 +99,19 @@ public class CaixaEntrada extends JPanel {
 				{
 					Cliente c = new Cliente();
 					
-					int tam = 0;
-					
 					try
 					{
-						Mensagem m = c.retornarEmail(tp.getUsuarioLogado());
+						Mensagem m = c.retornarEmail(tp.getUsuarioLogado(), tp.getDominio());
 						
 						list.removeAll();
-						list.add("                                                                         Mensagem "+ tam);
+						list.add("                                                                   Ultima Mensagem ");
 						list.add("Remetente:");
+						list.add(m.getRemetente());
+						list.add("Título:");
 						list.add(m.getTitulo());
-						list.add("\n");
 						list.add("Mensagem:");
 						list.add(m.getCorpo());
-						
+							
 					}catch (Exception e) {}
 				}
 				else

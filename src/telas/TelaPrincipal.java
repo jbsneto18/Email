@@ -21,6 +21,7 @@ public class TelaPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private String email;
+	private String dominio;
 	
 	/**
 	 * Launch the application.
@@ -29,7 +30,7 @@ public class TelaPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaPrincipal frame = new TelaPrincipal("");
+					TelaPrincipal frame = new TelaPrincipal("", "");
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,13 +42,14 @@ public class TelaPrincipal extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaPrincipal(String emailUser) 
+	public TelaPrincipal(String emailUser, String domin) 
 	{
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		
 		this.email = emailUser;
+		this.dominio = domin;
 		
 		PainelPrincipal painelPrinc = new PainelPrincipal(this);
 		this.add(painelPrinc);
@@ -101,4 +103,8 @@ public class TelaPrincipal extends JFrame {
 		return this.email;
 	}
 	
+	public String getDominio ()
+	{
+		return this.dominio;
+	}
 }

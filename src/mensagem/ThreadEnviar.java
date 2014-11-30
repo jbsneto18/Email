@@ -30,8 +30,9 @@ public class ThreadEnviar implements Runnable {
 	public void run() {
 
 		Mensagem message = (Mensagem) dados.getMensagem();
-		Serializador.addEmail(message);
-
+		Serializador.addEmail(message, dados.getDominio());
+		Serializador.salvarEmail(dados.getDominio());
+		
 		System.out.println("Mensagem recebida!\n remetente: "
 				+ message.getRemetente());
 		System.out

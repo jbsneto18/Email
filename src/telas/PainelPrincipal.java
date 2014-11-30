@@ -41,7 +41,7 @@ public class PainelPrincipal extends JPanel {
 			public void actionPerformed(ActionEvent arg0) {
 				Cliente c = new Cliente();
 				try {
-					c.excluirUsuario(tp.getUsuarioLogado());
+					c.excluirUsuario(tp.getUsuarioLogado(), tp.getDominio());
 				} catch (ClassNotFoundException | IOException
 						| InterruptedException e) {
 					// TODO Auto-generated catch block

@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.SplittableRandom;
 
 public class CadastroUsuario extends JPanel {
 	private JTextField txtNome;
@@ -31,7 +32,7 @@ public class CadastroUsuario extends JPanel {
 	 */
 	public CadastroUsuario(TelaPrincipal fp) {
 		setLayout(null);
-		SerializadorUser.carregaUser();
+		//SerializadorUser.carregaUser();
 		JLabel lblCadastroDeCliente = new JLabel("Cadastro de Usu\u00E1rio");
 		lblCadastroDeCliente.setFont(new Font("Arial", Font.BOLD, 18));
 		lblCadastroDeCliente.setBounds(190, 37, 188, 43);
@@ -78,12 +79,20 @@ public class CadastroUsuario extends JPanel {
 				
 				String splitEmail[] = email.split("@");
 				
+				String dominio;
+				
+				if (splitEmail[1].equals("apocalipse"))
+					dominio = "apocalipse";
+				else
+					dominio = "ikinho";
+				
 				if (splitEmail[1].equals("apocalipse") || splitEmail[1].equals("ikinho"))
 				{
 					Cadastro cad = new Cadastro(nome, email);
 					Cliente c = new Cliente();
 					try {
-						c.cadastrarUsuario(cad);
+						
+						c.cadastrarUsuario(cad, dominio);
 					} catch (ClassNotFoundException | IOException
 							| InterruptedException e1) {
 						// TODO Auto-generated catch block

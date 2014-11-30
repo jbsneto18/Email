@@ -25,7 +25,8 @@ public class Inicio extends JFrame {
 	private JPanel contentPane;
 
 	private JTextField txtEmail;
-	private TelaPrincipal newTela = new TelaPrincipal("");
+	private TelaPrincipal newTela = new TelaPrincipal("", "");
+	private String dominio;
 
 	/**
 	 * Launch the application.
@@ -90,18 +91,41 @@ public class Inicio extends JFrame {
 				
 				emailUser = txtEmail.getText();
 				
-				SerializadorUser.carregaUser();
+				String splitEmail[] = emailUser.split("@");
 				
-				for (int i=0; i < SerializadorUser.user.size(); i++)
+				if (splitEmail[1].equals("apocalipse"))
 				{
-					if (emailUser.equals(SerializadorUser.user.get(i).getEmail()))
+					dominio = "apocalipse";
+					SerializadorUser.carregaUser(dominio);
+					
+					for (int i=0; i < SerializadorUser.user.size(); i++)
 					{
-						newTela = new TelaPrincipal(emailUser);
-						newTela.setVisible(true);
-						dispose();
-						status = 1;
+						if (emailUser.equals(SerializadorUser.user.get(i).getEmail()))
+						{
+							newTela = new TelaPrincipal(emailUser, dominio);
+							newTela.setVisible(true);
+							dispose();
+							status = 1;
+						}
 					}
-				}		
+				}
+				else
+				{
+					dominio = "ikinho";
+					
+					SerializadorUser.carregaUser(dominio);
+					
+					for (int i=0; i < SerializadorUser.userB.size(); i++)
+					{
+						if (emailUser.equals(SerializadorUser.userB.get(i).getEmail()))
+						{
+							newTela = new TelaPrincipal(emailUser, dominio);
+							newTela.setVisible(true);
+							dispose();
+							status = 1;
+						}
+					}
+				}
 				
 				if (status == 0)
 					JOptionPane.showMessageDialog(null, "Usuário inválido, por favor, cadastra-se");

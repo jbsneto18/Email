@@ -27,10 +27,9 @@ import java.awt.List;
 import java.awt.Scrollbar;
 import java.awt.Label;
 
-public class Servidor extends JFrame {
+public class ServidorB extends JFrame {
 
 	private JPanel contentPane;
-	private ServidorX servidorX;
 	private ServidorY servidorY;
 	private JButton btnAtivar;
 	private JButton btnDesligar;
@@ -44,7 +43,7 @@ public class Servidor extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Servidor frame = new Servidor();
+					ServidorB frame = new ServidorB();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,11 +55,11 @@ public class Servidor extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public Servidor() {
+	public ServidorB() {
 		setResizable(false);
-		Serializador.carregaEmails("apocalipse");
+		Serializador.carregaEmails("ikinho");
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
-		setBounds(100, 100, 710, 400);
+		setBounds(100, 100, 711, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -69,7 +68,7 @@ public class Servidor extends JFrame {
 		this.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				Serializador.salvarEmail("apocalipse");
+				Serializador.salvarEmail("ikinho");
 			    System.exit(0);
 			}
 			  });
@@ -94,12 +93,12 @@ public class Servidor extends JFrame {
 				    @Override  
 				    public void run() {  
 				try {
-					servidorX = new ServidorX();
+					servidorY = new ServidorY();
 				} catch (ClassNotFoundException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				servidorX.setStatus(true);
+				servidorY.setStatus(true);
 				    }  
 				}).start();
 			}
@@ -122,7 +121,7 @@ public class Servidor extends JFrame {
 				new Thread(new Runnable() {  
 				    @Override  
 				    public void run() {  
-				servidorX.setStatus(false);
+				servidorY.setStatus(false);
 				
 				    }  
 				}).start();
@@ -131,8 +130,8 @@ public class Servidor extends JFrame {
 		btnDesligar.setBounds(109, 35, 89, 23);
 		contentPane.add(btnDesligar);
 		
-		JLabel lblServidor = new JLabel("Servidor Apocalipse");
-		lblServidor.setBounds(10, 0, 183, 29);
+		JLabel lblServidor = new JLabel("Servidor ikinho");
+		lblServidor.setBounds(10, 0, 188, 29);
 		lblServidor.setForeground(Color.BLACK);
 		lblServidor.setFont(new Font("Arial", Font.BOLD, 18));
 		contentPane.add(lblServidor);
@@ -160,7 +159,7 @@ public class Servidor extends JFrame {
 		contentPane.add(listMensagem);
 		
 		JButton btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.setBounds(606, 336, 89, 23);
+		btnAtualizar.setBounds(606, 337, 89, 23);
 		contentPane.add(btnAtualizar);
 		
 		btnAtualizar.addActionListener(new ActionListener() {
@@ -181,21 +180,21 @@ public class Servidor extends JFrame {
 	
 	public void listaUsersCadastrados ()
 	{
-			SerializadorUser.carregaUser("apocalipse");
-			listUsuarios.clear();
-			for (int i=0; i < SerializadorUser.user.size(); i++)
-				listUsuarios.add(SerializadorUser.user.get(i).getNome());
+		SerializadorUser.carregaUser("ikinho");
+		
+		for (int i=0; i < SerializadorUser.userB.size(); i++)
+			listUsuarios.add(SerializadorUser.userB.get(i).getNome());
 	}
 	
 	public void listMensagens () throws ClassNotFoundException, IOException
 	{
-		Serializador.carregaEmails("apocalipse");
+		Serializador.carregaEmails("ikinho");
 		
-		for (int i=0; i < Serializador.email.size(); i++)
+		for (int i=0; i < Serializador.emailB.size(); i++)
 		{
-			listMensagem.add("Remetente: "+Serializador.email.get(i).getRemetente()+
-							 "| Destinatário: "+Serializador.email.get(i).getRemetente()+
-							 "| Título: "+Serializador.email.get(i).getTitulo());
+			listMensagem.add("Remetente: "+Serializador.emailB.get(i).getRemetente()+
+							 "| Destinatário: "+Serializador.emailB.get(i).getRemetente()+
+							 "| Título: "+Serializador.emailB.get(i).getTitulo());
 		}
 	}
 }

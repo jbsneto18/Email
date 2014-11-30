@@ -32,20 +32,51 @@ public class ThreadLerMsgs implements Runnable {
 
 		String emailUsuario = (String) dados.getEmail();
 		ArrayList<Mensagem> m = new ArrayList<Mensagem>();
-		for (int i = 0; i < Serializador.email.size(); i++) {
-			if (Serializador.email.get(i).getDestinatario()
-					.equals(emailUsuario)) {
-				m.add(Serializador.email.get(i));
+		
+		if (dados.getDominio().equals("apocalipse"))
+		{
+			for (int i = 0; i < Serializador.email.size(); i++) 
+			{
+				if (Serializador.email.get(i).getDestinatario()
+						.equals(emailUsuario)) {
+					m.add(Serializador.email.get(i));
+				}
+			}
+
+			for (int i = 0; i < Serializador.email.size(); i++) 
+			{
+				if (Serializador.email.get(i).getDestinatario()
+						.equals(emailUsuario)) {
+					Serializador.email.remove(i);
+					i = i - 1;
+					Serializador.salvarEmail("apocalipse");
+					break;
+					// i = 0;//poderia ser assim mas nao sei como o array
+					// list reorganiza
+				}
 			}
 		}
+		else
+		{
+			for (int i = 0; i < Serializador.emailB.size(); i++) 
+			{
+				if (Serializador.emailB.get(i).getDestinatario()
+						.equals(emailUsuario)) {
+					m.add(Serializador.emailB.get(i));
+				}
+			}
 
-		for (int i = 0; i < Serializador.email.size(); i++) {
-			if (Serializador.email.get(i).getDestinatario()
-					.equals(emailUsuario)) {
-				Serializador.email.remove(i);
-				i = i - 1;
-				// i = 0;//poderia ser assim mas nao sei como o array
-				// list reorganiza
+			for (int i = 0; i < Serializador.emailB.size(); i++) 
+			{
+				if (Serializador.emailB.get(i).getDestinatario()
+						.equals(emailUsuario)) {
+					Serializador.emailB.remove(i);
+					i = i - 1;
+					Serializador.salvarEmail("ikinho");
+					break;
+					// i = 0;//poderia ser assim mas nao sei como o array
+					// list reorganiza
+				}
 			}
 		}
 
