@@ -194,8 +194,8 @@ public class Servidor extends JFrame {
 		for (int i=0; i < Serializador.email.size(); i++)
 		{
 			listMensagem.add("Remetente: "+Serializador.email.get(i).getRemetente()+
-							 "| Destinatário: "+Serializador.email.get(i).getRemetente()+
-							 "| Título: "+Serializador.email.get(i).getTitulo());
+							 " | Destinatário: "+Serializador.email.get(i).getDestinatario()+
+							 " | Título: "+Serializador.email.get(i).getTitulo());
 		}
 	}
 }

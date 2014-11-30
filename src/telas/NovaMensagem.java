@@ -4,6 +4,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
+import CadastroUser.Cadastro;
 import Serializador.Serializador;
 import Serializador.SerializadorUser;
 
@@ -11,11 +12,13 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import mensagem.Cliente;
+
 import javax.swing.JTextArea;
 
 public class NovaMensagem extends JPanel {
@@ -116,11 +119,20 @@ public class NovaMensagem extends JPanel {
 					{
 						dominio = "apocalipse";
 						
-						SerializadorUser.carregaUser(dominio);
+						ArrayList<Cadastro> cadast = new ArrayList<Cadastro>();
 						
-						for (int i=0; i< SerializadorUser.user.size(); i++)
+						Cliente c1 = new Cliente();
+						try {
+							cadast = c1.carregarUsers(dominio);
+						} catch (ClassNotFoundException | IOException
+								| InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+						for (int i=0; i< cadast.size(); i++)
 						{
-							if (destinatario.equals(SerializadorUser.user.get(i).getEmail()))
+							if (destinatario.equals(cadast.get(i).getEmail()))
 							{
 								try {
 									Cliente c = new Cliente();
@@ -140,11 +152,20 @@ public class NovaMensagem extends JPanel {
 					{
 						dominio = "ikinho";
 						
-						SerializadorUser.carregaUser(dominio);
+						ArrayList<Cadastro> cadast = new ArrayList<Cadastro>();
 						
-						for (int i=0; i< SerializadorUser.userB.size(); i++)
+						Cliente c1 = new Cliente();
+						try {
+							cadast = c1.carregarUsers(dominio);
+						} catch (ClassNotFoundException | IOException
+								| InterruptedException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						
+						for (int i=0; i< cadast.size(); i++)
 						{
-							if (destinatario.equals(SerializadorUser.userB.get(i).getEmail()))
+							if (destinatario.equals(cadast.get(i).getEmail()))
 							{
 								try {
 									Cliente c = new Cliente();
