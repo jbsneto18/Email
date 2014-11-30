@@ -28,7 +28,7 @@ public class ServidorX {
 		// server.close();
 	}
 	
-	public synchronized void servidorfunfando() throws IOException, ClassNotFoundException{
+	public void servidorfunfando() throws IOException, ClassNotFoundException{
 		
 		System.out.println("Aguardando cliente");
 		Socket socket = server.accept();
@@ -78,7 +78,6 @@ public class ServidorX {
 
 			ThreadExcluirUser excluir = new ThreadExcluirUser(dados, oos, socket, ois);
 			new Thread(excluir).start();
-			socket.close();
 			
 		}
 	}

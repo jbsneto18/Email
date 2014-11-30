@@ -13,8 +13,6 @@ import Serializador.SerializadorUser;
 
 public class ThreadExcluirUser implements Runnable {
 
-	
-	
 	private Requisicoes dados;
 	private ObjectOutputStream oos;
 	private Socket socket;
@@ -33,28 +31,26 @@ public class ThreadExcluirUser implements Runnable {
 
 		String email = dados.getEmail();
 		SerializadorUser.carregaUser();
-		
-		for(int i=0; i < SerializadorUser.user.size(); i++){
-			if(SerializadorUser.user.get(i).getEmail().equals(email)){
+
+		for (int i = 0; i < SerializadorUser.user.size(); i++) {
+			if (SerializadorUser.user.get(i).getEmail().equals(email)) {
 				SerializadorUser.user.remove(i);
 				break;
 			}
 		}
-		
+
 		SerializadorUser.salvarUser();
-		
-		try{
-		oos.writeObject("Ok");
-		ois.close();
-		oos.close();
-		socket.close();
+
+		try {
+			oos.writeObject("Ok");
+			oos.close();
+			ois.close();
+			socket.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
-	
-	
 }
