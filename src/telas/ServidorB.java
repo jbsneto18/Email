@@ -130,7 +130,7 @@ public class ServidorB extends JFrame {
 		btnDesligar.setBounds(109, 35, 89, 23);
 		contentPane.add(btnDesligar);
 		
-		JLabel lblServidor = new JLabel("Servidor ikinho");
+		JLabel lblServidor = new JLabel("Servidor Ikinho");
 		lblServidor.setBounds(10, 0, 188, 29);
 		lblServidor.setForeground(Color.BLACK);
 		lblServidor.setFont(new Font("Arial", Font.BOLD, 18));

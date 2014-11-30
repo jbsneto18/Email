@@ -44,6 +44,13 @@ public class ServidorX {
 			new Thread(enviar).start();
 			
 		}
+		
+		if (dados.getRequisicao().equals("enviarServer")) {
+
+			ThreadEnviarServer  enviarServer = new ThreadEnviarServer(dados, oos, socket, ois);
+			new Thread(enviarServer).start();
+			
+		}
 
 		if (dados.getRequisicao().equals("lerMsgs")) {// Nesta String eu
 														// estou recebendo o

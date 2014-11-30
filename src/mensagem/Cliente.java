@@ -14,6 +14,7 @@ public class Cliente {
 	
 	private String dominio;
 	private int port;
+	private String splitDest [];
 	
 	public Cliente() {
 
@@ -33,11 +34,17 @@ public class Cliente {
 		//Se o dominio for apocalipse, as requisições serão direcionadas para a porta do servidorX, 
 		//Caso seja ikinho, será direcionada para porta do servidorY
 		
-		if (dominio.equals("apocalipse"))
-			this.port = 9876;
-		else
-			this.port = 12345;
+		splitDest = destinatario.split("@");
 		
+		if (dominio.equals("apocalipse") && splitDest[1].equals("apocalipse"))
+			this.port = 9876;
+		else if (dominio.equals("ikinho") && splitDest[1].equals("ikinho"))
+			this.port = 12345;
+		else if (dominio.equals("apocalipse") && splitDest[1].equals("ikinho"))
+			this.port = 12360;
+		else 
+			this.port = 12360;
+			
 		Mensagem m = new Mensagem();
 		m.setCorpo(corpo);
 		m.setDestinatario(destinatario);
@@ -47,9 +54,22 @@ public class Cliente {
 		socket = new Socket(host.getHostName(), port);
 		oos = new ObjectOutputStream(socket.getOutputStream());
 		System.out.println("Sending request to Socket Server");
-
-		ClientEnviaMsg envia = new ClientEnviaMsg(oos, m, dominio);
-		new Thread(envia).start();
+		
+		if (dominio.equals("apocalipse") && splitDest[1].equals("ikinho"))
+		{
+			ServidorEnviaMsg envia = new ServidorEnviaMsg(oos, m, splitDest[1]);
+			new Thread(envia).start();
+		}
+		else if (dominio.equals("ikinho") && splitDest[1].equals("apocalipse"))
+		{
+			ServidorEnviaMsg envia = new ServidorEnviaMsg(oos, m, splitDest[1]);
+			new Thread(envia).start();
+		}
+		else
+		{
+			ClientEnviaMsg envia = new ClientEnviaMsg(oos, m, dominio);
+			new Thread(envia).start();
+		}
 
 		// RESPOSTA DO SERVIDOR
 		ois = new ObjectInputStream(socket.getInputStream());
