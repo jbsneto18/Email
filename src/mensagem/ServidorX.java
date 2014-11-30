@@ -20,140 +20,70 @@ public class ServidorX {
 	public ServidorX() throws IOException, ClassNotFoundException {
 		server = new ServerSocket(port);
 		while (status) {
-			System.out.println("Aguardando cliente");
-			Socket socket = server.accept();
-			ObjectInputStream ois = new ObjectInputStream(
-					socket.getInputStream());
-
-			Requisicoes dados = (Requisicoes) ois.readObject();
-
-			if (dados.getRequisicao().equals("enviar")) {
-
-				Mensagem message = (Mensagem) dados.getMensagem();
-				Serializador.addEmail(message);
-
-				System.out.println("Mensagem recebida!\n remetente: "
-						+ message.getRemetente());
-				System.out
-						.println("Destinatário: " + message.getDestinatario());
-				System.out.println("Titulo: " + message.getTitulo());
-				System.out.println("Corpo: " + message.getCorpo());
-				ObjectOutputStream oos = new ObjectOutputStream(
-						socket.getOutputStream());
-				oos.writeObject("Ok");
-				ois.close();
-				oos.close();
-				socket.close();
-			}
-
-			if (dados.getRequisicao().equals("lerMsgs")) {// Nesta String eu
-															// estou recebendo o
-															// nome do usuario
-															// para consultar e
-															// enviar
-
-				String emailUsuario = (String) dados.getEmail();
-				ArrayList<Mensagem> m = new ArrayList<Mensagem>();
-				for (int i = 0; i < Serializador.email.size(); i++) {
-					if (Serializador.email.get(i).getDestinatario()
-							.equals(emailUsuario)) {
-						m.add(Serializador.email.get(i));
-					}
-				}
-
-				for (int i = 0; i < Serializador.email.size(); i++) {
-					if (Serializador.email.get(i).getDestinatario()
-							.equals(emailUsuario)) {
-						Serializador.email.remove(i);
-						i = i - 1;
-						// i = 0;//poderia ser assim mas nao sei como o array
-						// list reorganiza
-					}
-				}
-
-				ObjectOutputStream oos = new ObjectOutputStream(
-						socket.getOutputStream());
-				oos.writeObject(m);
-				ois.close();
-				oos.close();
-				socket.close();
-			}
-
-			if (dados.getRequisicao().equals("lerMsg")) {// Nesta String eu
-															// estou recebendo o
-															// nome do usuario
-															// para consultar e
-															// enviar
-				int flag = 0;
-				int indice = 0;
-				String emailUsuario = (String) dados.getEmail();
-				ArrayList<Mensagem> m = new ArrayList<Mensagem>();
-				for (int i = 0; i < Serializador.email.size(); i++) {
-					if (Serializador.email.get(i).getDestinatario()
-							.equals(emailUsuario)) {
-						m.add(Serializador.email.get(i));
-						flag = 1;
-						indice = i;
-					}
-				}
-
-				if (flag == 1) {
-					Serializador.email.remove(indice);
-				}
-
-				ObjectOutputStream oos = new ObjectOutputStream(
-						socket.getOutputStream());
-				if (m.size() - 1 == -1) {
-					oos.writeObject(null);
-				} else {
-					oos.writeObject(m.get(m.size() - 1));
-				}
-				ois.close();
-				oos.close();
-				socket.close();
-			}
-
-			if (dados.getRequisicao().equals("cadastroUser")) {
-
-				Cadastro c = (Cadastro) dados.getCadastro();
-				SerializadorUser.addUser(c);
-				SerializadorUser.salvarUser();
-
-				ObjectOutputStream oos = new ObjectOutputStream(
-						socket.getOutputStream());
-				oos.writeObject("Ok");
-				ois.close();
-				oos.close();
-				socket.close();
-			}
-
-			if (dados.getRequisicao().equals("excluirUser")) {
-
-				String email = dados.getEmail();
-				SerializadorUser.carregaUser();
-				
-				for(int i=0; i < SerializadorUser.user.size(); i++){
-					if(SerializadorUser.user.get(i).getEmail().equals(email)){
-						SerializadorUser.user.remove(i);
-						break;
-					}
-				}
-				
-				SerializadorUser.salvarUser();
-				
-				ObjectOutputStream oos = new ObjectOutputStream(
-						socket.getOutputStream());
-				oos.writeObject("Ok");
-				ois.close();
-				oos.close();
-				socket.close();
-			}
-
+			
+			servidorfunfando();
 			// if(message.equalsIgnoreCase("exit")) break;
 		}
 		// System.out.println("Shutting down Socket server!!");
 		// server.close();
 	}
+	
+	public synchronized void servidorfunfando() throws IOException, ClassNotFoundException{
+		
+		System.out.println("Aguardando cliente");
+		Socket socket = server.accept();
+		ObjectInputStream ois = new ObjectInputStream(
+				socket.getInputStream());
+		ObjectOutputStream oos = new ObjectOutputStream(
+				socket.getOutputStream());
+		Requisicoes dados = (Requisicoes) ois.readObject();
+
+		if (dados.getRequisicao().equals("enviar")) {
+
+			ThreadEnviar  enviar = new ThreadEnviar(dados, oos, socket, ois);
+			new Thread(enviar).start();
+			
+		}
+
+		if (dados.getRequisicao().equals("lerMsgs")) {// Nesta String eu
+														// estou recebendo o
+														// nome do usuario
+														// para consultar e
+														// enviar
+
+			ThreadLerMsgs lermsgs = new ThreadLerMsgs(dados, oos, socket, ois);
+			new Thread(lermsgs).start();
+			
+		}
+
+		if (dados.getRequisicao().equals("lerMsg")) {// Nesta String eu
+														// estou recebendo o
+														// nome do usuario
+														// para consultar e
+														// enviar
+			ThreadLerMsg lermsg = new ThreadLerMsg(dados, oos, socket, ois);
+			new Thread(lermsg).start();
+			
+		}
+
+		 if (dados.getRequisicao().equals("cadastroUser")) {
+
+			ThreadCadastroUser novo = new ThreadCadastroUser(dados, oos, socket, ois);
+			new Thread(novo).start();
+			
+
+		}
+
+		if (dados.getRequisicao().equals("excluirUser")) {
+
+			ThreadExcluirUser excluir = new ThreadExcluirUser(dados, oos, socket, ois);
+			new Thread(excluir).start();
+			socket.close();
+			
+		}
+	}
+
+	
 
 	public void setStatus(boolean s) {
 		status = s;
