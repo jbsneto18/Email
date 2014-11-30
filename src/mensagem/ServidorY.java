@@ -37,7 +37,14 @@ public class ServidorY {
 		ObjectOutputStream oos = new ObjectOutputStream(
 				socket.getOutputStream());
 		Requisicoes dados = (Requisicoes) ois.readObject();
+		
+		if (dados.getRequisicao().equals("carregaUsers")) {
 
+			ThreadCarregaUsers  carregaEmails = new ThreadCarregaUsers(dados, oos, socket, ois, dados.getDominio());
+			new Thread(carregaEmails).start();
+			
+		}
+		
 		if (dados.getRequisicao().equals("enviar")) {
 
 			ThreadEnviar  enviar = new ThreadEnviar(dados, oos, socket, ois);

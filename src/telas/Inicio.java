@@ -8,6 +8,8 @@ import java.awt.Label;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,6 +19,8 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 
+import mensagem.Cliente;
+import CadastroUser.Cadastro;
 import Serializador.Serializador;
 import Serializador.SerializadorUser;
 
@@ -96,11 +100,22 @@ public class Inicio extends JFrame {
 				if (splitEmail[1].equals("apocalipse"))
 				{
 					dominio = "apocalipse";
-					SerializadorUser.carregaUser(dominio);
 					
-					for (int i=0; i < SerializadorUser.user.size(); i++)
+					ArrayList<Cadastro> cadast = new ArrayList<Cadastro>();
+					
+					Cliente c = new Cliente();
+					try {
+						cadast = c.carregarUsers(dominio);
+					} catch (ClassNotFoundException | IOException
+							| InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+					for (int i=0; i < cadast.size(); i++)
 					{
-						if (emailUser.equals(SerializadorUser.user.get(i).getEmail()))
+						if (emailUser.equals(cadast.get(i).getEmail()))
 						{
 							newTela = new TelaPrincipal(emailUser, dominio);
 							newTela.setVisible(true);
@@ -113,11 +128,21 @@ public class Inicio extends JFrame {
 				{
 					dominio = "ikinho";
 					
-					SerializadorUser.carregaUser(dominio);
+					ArrayList<Cadastro> cadast = new ArrayList<Cadastro>();
 					
-					for (int i=0; i < SerializadorUser.userB.size(); i++)
+					Cliente c = new Cliente();
+					try {
+						cadast = c.carregarUsers(dominio);
+					} catch (ClassNotFoundException | IOException
+							| InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					
+					for (int i=0; i < cadast.size(); i++)
 					{
-						if (emailUser.equals(SerializadorUser.userB.get(i).getEmail()))
+						if (emailUser.equals(cadast.get(i).getEmail()))
 						{
 							newTela = new TelaPrincipal(emailUser, dominio);
 							newTela.setVisible(true);
