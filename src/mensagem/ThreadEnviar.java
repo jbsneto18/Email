@@ -25,34 +25,59 @@ public class ThreadEnviar implements Runnable {
 		this.socket = socket;
 		this.ois = ois;
 	}
-	
+
 	@Override
 	public void run() {
 
+		int flag = 0;
 		Mensagem message = (Mensagem) dados.getMensagem();
-		Serializador.addEmail(message, dados.getDominio());
-		Serializador.salvarEmail(dados.getDominio());
-		
-		System.out.println("Mensagem recebida!\n remetente: "
-				+ message.getRemetente());
-		System.out
-				.println("Destinatário: " + message.getDestinatario());
-		System.out.println("Titulo: " + message.getTitulo());
-		System.out.println("Corpo: " + message.getCorpo());
-		
-		try {
-			oos.writeObject("Ok");
-			ois.close();
-			oos.close();
-			socket.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		for (int i = 0; i < Serializador.email.size(); i++) {
+			if (Serializador.email.get(i).getTitulo()
+					.equals(message.getTitulo())) {
+				flag++;
+			}
+		}
+
+		for (int i = 0; i < Serializador.emailB.size(); i++) {
+			if (Serializador.emailB.get(i).getTitulo()
+					.equals(message.getTitulo())) {
+				flag++;
+			}
 		}
 		
-		
+		if(flag == 0){
+			Serializador.addEmail(message, dados.getDominio());
+			Serializador.salvarEmail(dados.getDominio());
+
+			System.out.println("Mensagem recebida!\n remetente: "
+					+ message.getRemetente());
+			System.out.println("Destinatário: " + message.getDestinatario());
+			System.out.println("Titulo: " + message.getTitulo());
+			System.out.println("Corpo: " + message.getCorpo());
+
+			try {
+				oos.writeObject("Ok");
+				ois.close();
+				oos.close();
+				socket.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else{
+			
+			try {
+				oos.writeObject("Fail");
+				ois.close();
+				oos.close();
+				socket.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+
 	}
 
-	
-	
 }

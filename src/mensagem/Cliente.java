@@ -53,7 +53,7 @@ public class Cliente {
 		return retorno;
 	}
 	
-	public void cadastrarEmail(String remetente, String destinatario,
+	public String cadastrarEmail(String remetente, String destinatario,
 			String corpo, String titulo, String domin)
 			throws UnknownHostException, IOException, ClassNotFoundException,
 			InterruptedException {
@@ -113,6 +113,8 @@ public class Cliente {
 		socket.close();
 
 		Thread.sleep(100);
+		
+		return x;
 	}
 
 	public ArrayList<Mensagem> retornarEmails(String email, String domin)

@@ -90,18 +90,25 @@ public class CadastroUsuario extends JPanel {
 				{
 					Cadastro cad = new Cadastro(nome, email);
 					Cliente c = new Cliente();
+					String retorno = "";
 					try {
 						
-						c.cadastrarUsuario(cad, dominio);
+						retorno = c.cadastrarUsuario(cad, dominio);
 					} catch (ClassNotFoundException | IOException
 							| InterruptedException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 					
+					if(retorno.equals("Ok")){
+						JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+						fp.getCancelarCaixaEntrada();
+					}else{
+						JOptionPane.showMessageDialog(null, "Usuário já existe!!! Escolha outro email.");
+					}
+										
+										
 					
-					JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
-					fp.getCancelarCaixaEntrada();
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Domínio inválido, @ikinho ou @apocalipse são os disponíveis!");

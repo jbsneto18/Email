@@ -108,6 +108,8 @@ public class NovaMensagem extends JPanel {
 				corpo = textArea.getText();
 				titulo = txtTitulo.getText();
 				
+				String retorno = "";
+				
 				if (!destinatario.isEmpty() && !corpo.isEmpty() && !titulo.isEmpty())
 				{
 					
@@ -136,7 +138,7 @@ public class NovaMensagem extends JPanel {
 							{
 								try {
 									Cliente c = new Cliente();
-									c.cadastrarEmail(remetente, destinatario, corpo, titulo, dominio);
+									retorno = c.cadastrarEmail(remetente, destinatario, corpo, titulo, dominio);
 									status = 1;
 									tp.getCancelarCaixaEntrada();
 									break;
@@ -169,7 +171,7 @@ public class NovaMensagem extends JPanel {
 							{
 								try {
 									Cliente c = new Cliente();
-									c.cadastrarEmail(remetente, destinatario, corpo, titulo, dominio);
+									retorno = c.cadastrarEmail(remetente, destinatario, corpo, titulo, dominio);
 									status = 1;
 									tp.getCancelarCaixaEntrada();
 									break;
@@ -184,8 +186,12 @@ public class NovaMensagem extends JPanel {
 					
 					if (status == 0)
 						JOptionPane.showMessageDialog(null, "Destinatario Desconhecido, forneça um destinatário válido!");
-					else
-						JOptionPane.showMessageDialog(null, "Mensagem enviada com sucesso!");
+					else{
+						if(retorno.equals("Ok"))
+							JOptionPane.showMessageDialog(null, "Mensagem enviada com sucesso!");
+						else
+							JOptionPane.showMessageDialog(null, "Mensagem já existe!");
+					}
 				}
 				else
 					JOptionPane.showMessageDialog(null, "Preencha todos os campos corretamente!");
