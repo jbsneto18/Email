@@ -99,6 +99,14 @@ public class TelaPrincipal extends JFrame {
 		
 	}
 	
+	public void getInicio() 
+	{
+		// TODO Auto-generated method stub
+		Inicio in = new Inicio();
+		in.setVisible(true);
+		this.dispose();
+	}
+	
 	public String getUsuarioLogado(){
 		return this.email;
 	}

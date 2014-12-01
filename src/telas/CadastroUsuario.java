@@ -102,7 +102,7 @@ public class CadastroUsuario extends JPanel {
 					
 					if(retorno.equals("Ok")){
 						JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
-						fp.getCancelarCaixaEntrada();
+						fp.getInicio();
 					}else{
 						JOptionPane.showMessageDialog(null, "Usuário já existe!!! Escolha outro email.");
 					}
