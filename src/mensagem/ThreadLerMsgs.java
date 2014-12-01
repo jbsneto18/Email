@@ -46,9 +46,9 @@ public class ThreadLerMsgs implements Runnable {
 			for (int i = 0; i < Serializador.email.size(); i++) 
 			{
 				if (Serializador.email.get(i).getDestinatario()
-						.equals(emailUsuario)) {
-					Serializador.email.remove(i);
-					i = i - 1;
+						.equals(emailUsuario)) 
+				{
+					Serializador.email.remove(0);
 					Serializador.salvarEmail("apocalipse");
 					break;
 					// i = 0;//poderia ser assim mas nao sei como o array
@@ -71,7 +71,6 @@ public class ThreadLerMsgs implements Runnable {
 				if (Serializador.emailB.get(i).getDestinatario()
 						.equals(emailUsuario)) {
 					Serializador.emailB.remove(i);
-					i = i - 1;
 					Serializador.salvarEmail("ikinho");
 					break;
 					// i = 0;//poderia ser assim mas nao sei como o array

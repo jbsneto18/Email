@@ -190,12 +190,15 @@ public class Servidor extends JFrame {
 	public void listMensagens () throws ClassNotFoundException, IOException
 	{
 		Serializador.carregaEmails("apocalipse");
-		
+		String teste = "";
 		for (int i=0; i < Serializador.email.size(); i++)
 		{
-			listMensagem.add("Remetente: "+Serializador.email.get(i).getRemetente()+
-							 " | Destinatário: "+Serializador.email.get(i).getDestinatario()+
-							 " | Título: "+Serializador.email.get(i).getTitulo());
+			
+			teste = String.format("Remetente: "+Serializador.email.get(i).getRemetente()+
+								  " | Destinatário: "+Serializador.email.get(i).getDestinatario()+
+								  " | Título: "+Serializador.email.get(i).getTitulo(), "%-12s%.20s");
+			
+			listMensagem.add(teste);
 		}
 	}
 }

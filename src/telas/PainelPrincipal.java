@@ -1,5 +1,6 @@
 package telas;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
@@ -42,6 +43,8 @@ public class PainelPrincipal extends JPanel {
 				Cliente c = new Cliente();
 				try {
 					c.excluirUsuario(tp.getUsuarioLogado(), tp.getDominio());
+					JOptionPane.showMessageDialog(null, "Usuário deletado. Obrigado por usar nosso sistema!");
+					System.exit(0);
 				} catch (ClassNotFoundException | IOException
 						| InterruptedException e) {
 					// TODO Auto-generated catch block

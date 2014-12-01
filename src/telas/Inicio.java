@@ -99,13 +99,11 @@ public class Inicio extends JFrame {
 				
 				if (splitEmail[1].equals("apocalipse"))
 				{
-					dominio = "apocalipse";
-					
 					ArrayList<Cadastro> cadast = new ArrayList<Cadastro>();
 					
 					Cliente c = new Cliente();
 					try {
-						cadast = c.carregarUsers(dominio);
+						cadast = c.carregarUsers("apocalipse");
 					} catch (ClassNotFoundException | IOException
 							| InterruptedException e) {
 						// TODO Auto-generated catch block
@@ -117,7 +115,7 @@ public class Inicio extends JFrame {
 					{
 						if (emailUser.equals(cadast.get(i).getEmail()))
 						{
-							newTela = new TelaPrincipal(emailUser, dominio);
+							newTela = new TelaPrincipal(emailUser, "apocalipse");
 							newTela.setVisible(true);
 							dispose();
 							status = 1;
@@ -125,14 +123,12 @@ public class Inicio extends JFrame {
 					}
 				}
 				else
-				{
-					dominio = "ikinho";
-					
+				{	
 					ArrayList<Cadastro> cadast = new ArrayList<Cadastro>();
 					
 					Cliente c = new Cliente();
 					try {
-						cadast = c.carregarUsers(dominio);
+						cadast = c.carregarUsers("ikinho");
 					} catch (ClassNotFoundException | IOException
 							| InterruptedException e) {
 						// TODO Auto-generated catch block
@@ -144,7 +140,7 @@ public class Inicio extends JFrame {
 					{
 						if (emailUser.equals(cadast.get(i).getEmail()))
 						{
-							newTela = new TelaPrincipal(emailUser, dominio);
+							newTela = new TelaPrincipal(emailUser, "ikinho");
 							newTela.setVisible(true);
 							dispose();
 							status = 1;

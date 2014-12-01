@@ -121,6 +121,7 @@ public class Cliente {
 		Socket socket = null;
 		ObjectOutputStream oos = null;
 		ObjectInputStream ois = null;
+		
 		String dominio = domin;
 		
 		if (dominio.equals("apocalipse"))
@@ -158,9 +159,9 @@ public class Cliente {
 		ObjectOutputStream oos = null;
 		ObjectInputStream ois = null;
 		
-		this.dominio = domin;
+		String dominio = domin;
 		
-		if (dominio.equals("apocalipse"))
+		if (this.dominio.equals("apocalipse"))
 			this.port = 9876;
 		else
 			this.port = 12345;

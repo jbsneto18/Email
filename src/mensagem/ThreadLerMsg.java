@@ -36,6 +36,7 @@ public class ThreadLerMsg implements Runnable {
 		
 		if (dados.getDominio().equals("apocalipse"))
 		{
+			
 			for (int i = 0; i < Serializador.email.size(); i++) 
 			{
 				if (Serializador.email.get(i).getDestinatario()
