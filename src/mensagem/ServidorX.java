@@ -7,6 +7,8 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import mensagem.Mensagem;
 import CadastroUser.Cadastro;
 import Serializador.Serializador;
@@ -65,7 +67,6 @@ public class ServidorX {
 														// nome do usuario
 														// para consultar e
 														// enviar
-
 			ThreadLerMsgs lermsgs = new ThreadLerMsgs(dados, oos, socket, ois);
 			new Thread(lermsgs).start();
 			
@@ -76,6 +77,8 @@ public class ServidorX {
 														// nome do usuario
 														// para consultar e
 														// enviar
+
+			
 			ThreadLerMsg lermsg = new ThreadLerMsg(dados, oos, socket, ois);
 			new Thread(lermsg).start();
 			

@@ -103,7 +103,7 @@ public class CaixaEntrada extends JPanel {
 					{
 						Mensagem m = c.retornarEmail(tp.getUsuarioLogado(), tp.getDominio());
 						
-						
+						if(m != null){
 						list.add("                                                                   Ultima Mensagem ");
 						list.add("Remetente:");
 						list.add(m.getRemetente());
@@ -111,7 +111,7 @@ public class CaixaEntrada extends JPanel {
 						list.add(m.getTitulo());
 						list.add("Mensagem:");
 						list.add(m.getCorpo());
-							
+						}
 					}catch (Exception e) {}
 				}
 				else

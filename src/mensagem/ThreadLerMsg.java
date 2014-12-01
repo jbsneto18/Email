@@ -7,6 +7,8 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import CadastroUser.Cadastro;
 import Serializador.Serializador;
 import Serializador.SerializadorUser;
@@ -28,7 +30,7 @@ public class ThreadLerMsg implements Runnable {
 
 	@Override
 	public void run() {
-
+		
 		int flag = 0;
 		int indice = 0;
 		String emailUsuario = (String) dados.getEmail();
@@ -44,7 +46,6 @@ public class ThreadLerMsg implements Runnable {
 					m.add(Serializador.email.get(i));
 					flag = 1;
 					indice = i;
-					break;
 				}
 			}
 			
@@ -63,7 +64,6 @@ public class ThreadLerMsg implements Runnable {
 					m.add(Serializador.emailB.get(i));
 					flag = 1;
 					indice = i;
-					break;
 				}
 			}
 			

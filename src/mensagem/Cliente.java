@@ -8,6 +8,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import CadastroUser.Cadastro;
 
 public class Cliente {
@@ -153,18 +155,18 @@ public class Cliente {
 
 	public Mensagem retornarEmail(String email, String domin) throws UnknownHostException,
 			IOException, ClassNotFoundException, InterruptedException {
-
+		
 		InetAddress host = InetAddress.getLocalHost();
 		Socket socket = null;
 		ObjectOutputStream oos = null;
 		ObjectInputStream ois = null;
-		
 		String dominio = domin;
 		
-		if (this.dominio.equals("apocalipse"))
+		if (dominio.equals("apocalipse"))
 			this.port = 9876;
-		else
+		else			
 			this.port = 12345;
+		
 		
 		socket = new Socket(host.getHostName(), port);
 		oos = new ObjectOutputStream(socket.getOutputStream());
